@@ -1,0 +1,21 @@
+{% extends "base_mono_color.html" %}
+
+{% block title %}
+	Select a contact to delete
+{% endblock %}
+
+{% block header %}
+	Please input search string: some parts of the names or phones
+{% endblock %}
+
+{% block tbody_ %}
+   <form method = "POST">
+     <tr>
+       <td align="left"> 
+         <input type="text" name="Keywords"  size="100" >
+         <p></p> 
+         <div align = 'center'><input type="submit" value="Select contact to delete"><div>
+       </td> 
+     </tr>  
+   </form> 
+{% endblock%}           

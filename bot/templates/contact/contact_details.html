@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+	User details
+{% endblock %}
+
+{% block header %}
+	User details
+{% endblock %}
+
+{% block theader_ %}
+   <tr>
+   	<th align = "left" width="100">Field</th>
+        <th align = "left" width="500">Value</th>
+   </tr>
+{% endblock %}
+
+{% block tbody_ %}
+  <form method = "POST">
+    <tr>
+       <td>ID</td><td>&nbsp{{contact.contact_id}}</td>
+    </tr>
+    <tr>
+       <td>Name</td><td>&nbsp{{contact.name}}</td>
+    </tr>
+    <tr>
+       <td>Birthday</td><td>&nbsp{{contact.birthday}}</td>
+    </tr>
+    <tr>
+       <td>Email</td><td>&nbsp{{email}}</td>
+    </tr>
+    <tr>
+       <td><b>Phones</b></td><td></td>
+    </tr>
+       {% for item in phone %}
+         <tr>
+            <td></td><td>&nbsp{{item}}</td>
+         </tr>
+       {% endfor %}
+    <tr>
+       <td><b>Address</b></td><td></td>
+    </tr>
+    <tr>
+       <td>ZIP</td><td>&nbsp{{address.zip}}</td>
+    </tr>
+    <tr>
+       <td>Country</td><td>&nbsp{{address.country}}</td>
+    </tr>
+    <tr>
+       <td>Region</td><td>&nbsp{{address.region}}</td>
+    </tr>
+    <tr>
+       <td>City</td><td>&nbsp{{address.city}}</td>
+    </tr>
+    <tr>
+       <td>Street</td><td>&nbsp{{address.street}}</td>
+    </tr>
+    <tr>
+       <td>House</td><td>&nbsp{{address.house}}</td>
+    </tr>
+    <tr>
+       <td>Apartment</td><td>&nbsp{{address.apartment}}</td>
+    </tr>   
+  </form>
+{% endblock%}
+
+{% block links%}
+   <a href= /contact/edit_contact/{{contact.contact_id}}>Edit contact</a></p>
+   <a href= /contact/delete_contact/{{contact.contact_id}}>Delete contact</a></p>
+   <a href="javascript:window.history.back()">See one more contact</a></p>
+{% endblock %}

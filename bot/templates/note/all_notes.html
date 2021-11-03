@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+	All notes from your notebook
+{% endblock %}
+
+{% block header %}
+	All the notes I have found in your notebook
+{% endblock %}
+{% block tbody_ %}
+  {%for res in result %}
+        <tr>
+	<td>
+	<b>Note ID:</b> {{res.note_id}}<br>
+	<b>Tags:</b>
+
+		{% if res.tags%}
+		<mark>
+			{% for tag in res.tags %}
+				#{{tag}}&nbsp;
+			{% endfor %}
+		</mark>
+		{% endif %}
+		<br>
+	<b>Text:</b> {{res.text}}
+	</td>
+	</tr>
+ {%endfor%}   
+{% endblock%}
+
+
+
+
+

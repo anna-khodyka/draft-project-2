@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Edit note
+{% endblock %}
+
+{% block header %}
+	Please edit keywords and body for the note:
+{% endblock %}
+{% block tbody_ %}
+    <form method="POST">	
+    	<tr>
+               <td align="center">
+               <p></p>
+                   {% if res %}
+                        <div><input type="text" name="Keywords"  size="100" value = {{res.keywords}}></div>
+                        <p></p>
+                        <div><textarea cols="97" rows = "10" name = "Text">{{res.text}}</textarea></div>
+                        <p></p>
+                   {% else %}
+                        <div><input type="text" name="Keywords"  size="100" value = """></div>
+                        <p></p>
+                        <div><textarea cols="97" rows = "10" name = "Text"> " "</textarea></div>
+                        <p></p>
+                   {% endif %}
+               <div><input type="submit" value="Save note"><div>	   
+    </form>	      
+{% endblock%}
+

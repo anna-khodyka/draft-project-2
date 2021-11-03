@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Found some notes
+{% endblock %}
+
+{% block header %}
+	{% if result %}
+		All the notes i have found
+	{% else%}
+		There is a kind of problem
+	{% endif %}
+{% endblock %}
+{% block tbody_ %}
+{% if result %}
+	{%for res in result %}
+        	<tr>
+		  <td>
+		    <p><b>Note ID:</b>  {{res.note_id}}</p>
+       		    <p><b>Keywords:</b> {% if res.tags%}
+		<mark>
+			{% for tag in res.tags %}
+				#{{tag}}&nbsp;
+			{% endfor %}
+		</mark>
+		{% endif %}</p>
+	            <p>{{res.text}}</p>
+			  	<table style =" border: none; background-color: transparent;">
+					<tr style =" border: none; background-color: transparent;">
+						<td align="right" style =" border: none; background-color: transparent;">
+		        			<form action="/note/save_note/{{res.note_id}}" style =" border: none; background-color: transparent;">
+								<button name="edit" width = 200>Edit note &nbsp &nbsp</button>
+								&nbsp;
+							</form>
+						</td>
+						<td align="left" style =" border: none; background-color: transparent;">
+							<form action="/note/delete_note/{{res.note_id}}" style =" border: none; background-color: transparent;">
+								&nbsp;
+								<button name="delete" width = 200>Delete note</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+		  </td>
+		</tr>
+   {% endfor %}
+{% else %}
+        <tr>
+		  <td>
+			  <b>I'm really sorry, but this time I couldn't find any notes by your request.
+				  Try to search with another keywords.</b>
+		  </td>
+		</tr>
+{% endif %}
+{% endblock%}

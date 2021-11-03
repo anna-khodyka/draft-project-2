@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of evailable features</title>
+</head>
+<style>
+table, th, td, tr  { 
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+
+tr:nth-child(even) {
+  background-color: #BFC9CA;
+}
+th, td {
+  padding: 5px;
+}
+</style>
+<h2 align = 'center'>The list of all awailable features listed below:</h2>
+    <table width = '50%' align = center>
+    <tbody>
+    <thead>
+	<th>Command</th>
+        <th>Description</th> 
+    </thead>
+    {% for command in exec_command.values() %}
+        {% set command_list = command[1].split(":")%}
+        <tr>
+        <td>
+        <b>{{command_list[0]}}</b>
+        </td>
+        <td>
+           {{command_list[1]}}
+        </td>   
+        </td>
+        </tr>
+     {% endfor %}   
+     </tbody>
+     </table>
+     <p> </p>
+     <p align = 'center'><a href="/bot-command">Return to BOT embrace</a></p>
+        

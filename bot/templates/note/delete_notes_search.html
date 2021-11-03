@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Find note to delete
+{% endblock %}
+
+{% block header %}
+	Please input keyword to search the note to delete:
+{% endblock %}
+{% block tbody_ %}
+    <form method="POST">	
+      	       <tr>
+               	  <td align="center">
+               	     <div> <input type="Keywords" name="Keywords"  size="100" value = "Input keywords separated with ','"></div>
+              		   <p></p>
+               	           <input type="submit" value="Seek note">
+		      </div>	
+		  </td>
+               </tr>
+    </form>	      
+{% endblock%}

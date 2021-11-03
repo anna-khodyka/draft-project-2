@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<style> 
+	table, th, td, tr { 
+    		border: 1px solid black;
+    		border-collapse: collapse;
+		  	 		  }
+	table { width: 50%;
+		margin: auto;
+		}
+
+	tr:nth-child(odd) {
+  		background-color: #BFC9CA;
+                           }
+	th, td {
+  		padding: 5px;
+		}
+</style>
+
+<h3 align = "center">{% block header %} {% endblock %}</h2>
+
+<div align = 'center'>
+	{% block links %}{% endblock %}
+	<p align = 'center'><a href= /bot-command>Return to BOT embrace</a></p>
+</div>
+</html>

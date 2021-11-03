@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Find a contact
+{% endblock %}
+
+{% block header %}
+	Input search string: name or phone or even a part of it
+{% endblock %}
+
+{% block tbody_ %}
+  <form method = "POST">
+	<tr>
+          <td align = 'center'> 
+               <p></p> 
+	       <input type="text" name="Keywords"  size="100" >
+               <p></p> 
+               <div align = 'center'><input type="submit" value="Search contact"><div>
+          </td> 
+        </tr>	
+  </form>
+{% endblock%}           

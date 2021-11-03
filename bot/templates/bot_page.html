@@ -1,0 +1,36 @@
+ {% extends "base.html" %}
+
+ {% block title %}
+	Tell to the bot - what do you wish?
+ {% endblock %}
+
+ {% block header %}
+	Please input command for BOT<br>
+ {% endblock %}
+
+ {% block tbody_ %}
+ <form method = "POST">
+	<tr>			
+           <td>
+             <p align = 'center'>You could use either formal comand names or natural language requests</p>
+	     <p></p>
+             <div  align = 'center'><input type="text" name="BOT command" size= 60% /></div>
+	     <p></p> 	
+             <div align = 'center'><input type="submit" value="Post request"></div>
+           </td>
+	</tr> 	
+  </form>
+ {% endblock%}       
+
+ {% block links %}
+	<p align = 'center'><b>Bot command history</b></p>	
+	<table width = 30% align = 'center'>	
+		{% for key in command_history.keys()%}
+	   	  <tr>
+	            <td width = 20%>{{key}}</td>
+	            <td width = 80%>{{command_history[key]}}</td>
+	          </tr> 	 
+	       {% endfor%}	
+	<table>	
+ {% endblock %}
+</html>           

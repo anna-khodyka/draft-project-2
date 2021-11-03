@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Key social and economics data for today</title>
+  </head>
+  <style>
+	table, th, td, tr {
+    		border: 1px solid black;
+    		border-collapse: collapse;
+		  	 		  }
+	table { width: 50%;
+		    margin: auto;
+		    font-family: arial, sans-serif;
+
+		  }
+
+	tr:nth-child(odd) {
+  		background-color: #C0C0C0;
+                           }
+    th { font-family:arial, sans-serif;
+          background-color: #FFFFFF;
+        }
+
+	th, td {
+  		padding: 5px;
+		}
+    h2 {
+        text-align: center;
+        font-size: 18px;
+        color: #800000;
+        font-family: arial, sans-serif;}
+
+    .source { font: 11px arial, sans-serif; font-weight: italic; }
+
+  </style>
+  <body>
+    <table>
+     {% for feed_ in feed %}
+        <tr>
+          <td>
+              <h2>{{feed_.header}}</h2>
+              <p></p>
+              {{feed_.body}}
+              <p class = 'source' ><i>Source: {{feed_.url}}</i></p>
+          </td>
+        </tr>
+     {% endfor%}
+    </table>
+  </body>
+</html>

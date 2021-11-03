@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	All contacts from your address book
+{% endblock %}
+
+{% block header %}
+	All the contacts from your address book. Click ID to see details
+{% endblock %}
+{% block theader_%}
+   <tr>
+      <th width = 20%>ID</th>
+      <th width = 80%>Name</th>
+   </tr>
+{% endblock%}
+
+{% block tbody_ %}
+  {%for res in result %}
+        <tr>
+	   <td><a href =contact_detail/{{res.contact_id}}>{{res.contact_id}}</a></td>
+           <td>{{res.name}}</td>
+        </tr>
+  {%endfor%}
+{% endblock%}
+
+
+	
+	
+	

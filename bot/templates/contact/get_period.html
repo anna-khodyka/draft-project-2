@@ -1,0 +1,24 @@
+{% extends "base_mono_color.html" %}
+
+{% block title %}
+	Find a contacts with birthday in nearest period
+{% endblock %}
+
+{% block header %}
+	Please input amount of days in period: 0 - 365 days
+{% endblock %}
+{% block tbody_ %}
+<form method = "POST">
+	<tr>
+          <td align = 'center'>
+	    <p></p>	 
+            <input type="text" name="Period"  size="50" >
+            <div align= 'center'><font color="red">{{err_message}}</font></div>
+	    <p></p>
+	    <div align = 'center'><input type="submit" value="Get selebrations list"><div>
+           </td> 
+          </tr>       
+  </form>
+{% endblock%}
+
+         

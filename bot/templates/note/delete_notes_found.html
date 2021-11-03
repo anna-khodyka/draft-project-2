@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Found notes to delete
+{% endblock %}
+
+{% block header %}
+	{% if result %}
+		All the notes i have found
+	{% else%}
+		There is a kind of problem
+	{% endif %}
+{% endblock %}
+
+{% block tbody_ %}
+{% if result%}
+	{%for res in result %}
+              <tr>
+		<td><a href = delete_note/{{res.note_id}}>Note ID: {{res.note_id}}</a>
+       		    <p><b>Keywords:</b> {{res.keywords}}</p>
+	            <p>{{res.text}}</p> 				
+		</td>
+              </tr>
+   {%endfor%}
+{% else %}
+        <tr>
+		  <td>
+			  <b>I'm really sorry, but this time I couldn't find any notes by your request.
+				  Try to search with another keywords.</b>
+		  </td>
+		</tr>
+{% endif %}
+{% endblock%}
+

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Add new note
+{% endblock %}
+
+{% block header %}
+	Please input keywords and body for the note
+{% endblock %}
+{% block tbody_ %}
+    <form method="POST">	
+    	<tr>
+          <td align="left"> 
+            <div align = 'center'><input type="text" name="Keywords"  size="100" value = "Input keywords separated with ','"></div>
+            <p></p>
+	    <div align = 'center'><textarea cols="96" rows = '10' name = "Text">Please type your note here</textarea></div>
+            <p></p>
+            <div align = 'center'><input type="submit" value="Save note"><div>
+	  </td>
+        </td>	   
+ </form>	      
+{% endblock%}
+
+
+               
+	            
+   

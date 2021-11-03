@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Contacts to edit
+{% endblock %}
+
+{% block header %}
+	{% if result %}
+        Contacts by your request: click on ID to edit contact
+    {% else%}
+		There is a kind of problem
+	{% endif %}
+
+{% endblock %}
+
+{% block theader_ %}
+    <tr>
+      <th width = 20%>ID</th>
+      <th width = 80%>Name</th>
+    </tr>
+{% endblock %}
+
+{% block tbody_ %}
+{% if result %}
+    <form method = "POST">
+      {%for res in result %}
+         <tr>
+        <td><a href =/contact/contact_detail/{{res.contact_id}}>{{res.contact_id}}</a></td>
+            <td>{{res.name}}</td>
+         </tr>
+      {%endfor%}
+      </form>
+{% else%}
+     <tr>
+		 <td>
+         </td>
+		  <td>
+			  <b>I'm really sorry, but this time I couldn't find any contact by your request.
+				  Try to search with another keywords.</b>
+		  </td>
+
+		</tr>
+{% endif %}
+{% endblock%}
+

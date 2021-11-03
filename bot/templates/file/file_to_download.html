@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+	File repository
+{% endblock %}
+
+{% block header %}
+	{% if files %}
+        The list of files in your repository: click on ID to download
+    {% else%}
+		There is a kind of problem
+	{% endif %}
+
+{% endblock %}
+{% block form_line %}
+
+
+{% endblock %}
+
+{% block theader_ %}
+    <tr>
+      <th width = 10%>
+          <form name = 'select_type'
+                method = 'POST'
+                action='/file/download'>
+
+              <select name="file_type" id = "file_type"  size="1" style= "width:120px;">
+                    <option value ='All types'>All types</option>
+                  {% if types%}
+                {% for type in types %}
+                     <option value ={{type | safe }}>{{type |safe }}</option>
+                {% endfor %}
+              {% endif %}
+              </select>
+              <p></p>
+              <input type = submit value="Filter files by type" id = 'filter_files'>
+      </form>
+      </th>
+
+      <th width = 40%>Name</th>
+      <th width = 20%>Size</th>
+      <th width = 10%> </th>
+      <th width = 10%> </th>
+
+    </tr>
+{% endblock %}
+
+{% block tbody_ %}
+{% if files %}
+
+      {%for file in files %}
+        <tr>
+            <td>
+                {{file.file_type}}
+            </td>
+            <td>
+                {{file.name}}
+            </td>
+             <td>
+                {{file.file_length}} Mb
+            </td>
+            <td>
+                <form name="download"
+                      method="POST"
+                      action='/file/download_file/{{file.file_id}}'
+                      style =" border: none; background-color: transparent;">
+                      <button name="download" width = 200 style ="background-color: green;">Download</button>
+                </form>
+            </td>
+            <td>
+                 <form name="delete"
+                      method="POST"
+                      action='/file/delete/{{file.file_id}}'
+                      style =" border: none; background-color: transparent;">
+                      <button name="delete" width = 200 style ="background-color: red;">Delete</button>
+                </form>
+            </td>
+        </tr>
+      {%endfor%}
+      </form>
+{% else%}
+     <tr>
+		 <td>
+         </td>
+		  <td>
+			  <b>I'm really sorry, but this time I couldn't find any files by your request.
+				  Try to search with another keywords.</b>
+		  </td>
+
+		</tr>
+{% endif %}
+{% endblock%}
+

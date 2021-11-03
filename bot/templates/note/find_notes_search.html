@@ -1,0 +1,24 @@
+{% extends "base_mono_color.html" %}
+
+{% block title %}
+	Search for note
+{% endblock %}
+
+{% block header %}
+	Please input keywords to find note
+{% endblock %}
+{% block tbody_ %}
+    <form method="POST">	
+      	       <tr>	
+               	       <td align="center"> 
+               	           <div><input type="Keywords" name="Keywords"  size="100" value = "Input keywords separated with ','"></div>
+               	       </td>
+               </tr>
+               <tr>
+               		<td align="center">
+               		<div><input type="submit" value="Seek note"><div>
+			</td>
+	       </tr>	
+    </form>	      
+{% endblock%}
+	       
