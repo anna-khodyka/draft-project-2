@@ -1,0 +1,79 @@
+{"intents":
+   [
+    {"tag":"hello",
+     "patterns": ["hi", "hola", "hello", "how are you", "what's up"],
+     "responses": ["Hello!"]
+     }, 
+    {"tag": "add contact",
+     "patterns": ["new contact", "new record", "new user","add record", "create contact", "new phone", "add contact", "new number", "add frend", "new number", "new account", "save contact", "save phone"],
+     "responses": ["Create new contact for you"]
+     },
+    {"tag":"edit contact",
+     "patterns": ["update contact", "update record", "update phone", "update email", "edit contact", "edit record", "change record",  "new email", "new address", "add details", "edit details", "add birthday", "edit name", "change conact", "edit account", "edit birthday"],
+     "responses": ["Let's try to edit a contact"]
+     },
+    {"tag":"find contact",
+     "patterns": ["find contact", "search contact", "find record", "search name", "search record", "look for contact", "try find contact","seek for contact", "look for number", "find by name", "search number", "find number" ],
+     "responses": ["I'm going to help you to find contact"]
+     }, 
+    {"tag": "find notes",
+     "patterns": ["find notes", "find keyword", "search by keyword", "look for notes", "seek notes", "try find note", "seek keyword", "open note", "read note", "need note", "want note", "some note"],
+     "responses": ["Looking for notes"]
+     }, 
+    {"tag":"show all contacts",
+     "patterns": ["get contacts", "show all contacts", "show contacts", "all names", "all contacts", "list of contact", "print contact", "see all contact", "list addressbook", "show addressbook", "show all phones", "show all names", "all contacts", "show all records", "all records"],
+     "responses": ["Ready to print out all the contacts"]
+     },          
+      {"tag":"show all notes",
+     "patterns": ["get note", "show all notes", "show all texts", "show notes", "print notes", "list notes", "all notes", "print out notes"],
+     "responses": ["Print out all the notes"]
+     },        
+     {"tag": "help",
+     "patterns": ["help", "command", "rules", "format", "understand", "learn", "explain", "helper", "assistance"],
+     "responses": ["Here the list of available commands/features"]
+     },
+     {"tag": "add note",
+     "patterns": ["new note", "new text", "write note","add note", "add text", "create note", "write text", "save note", "save text note"],
+     "responses": ["Add new note to the notebook"]
+     },
+     {"tag": "edit note",
+     "patterns": ["edit note", "change note", "edit keyword", "new keyword", "rewrite note", "append note"],
+     "responses": ["Edit existing note"]
+     },         
+     {"tag": "delete contact",
+     "patterns": ["delete contact", "remove contact", "delete name", "remove name", "delete phone", "delete record", "remove record", "clear phone", "remove phone", "delete user"],
+     "responses": ["Try to find end delete contact"]
+     },          
+     {"tag": "delete note",
+     "patterns": ["delete note", "remove note", "cut note", "delete note", "remove text note", "delete text note", "delete note book record", "clear note"],
+     "responses": ["Try to find end delete note"]
+     },         
+     {"tag": "next birthday",
+     "patterns": ["list of new borners", "birthday schedule", "birthday", "list of dates", "nex birthday", "nearest birthday"],
+     "responses": ["Get the info about nearest new-borners"]
+     },       
+     {"tag": "logout",
+     "patterns": ["exit", "logout", "change user", "quit", "stop", "close", "good by", "by", "finish"],
+     "responses": ["Logout for current user"]
+     },
+     {"tag": "Upload file",
+     "patterns": ["Up load file","load data" , "store file", "put file", "upload image", "upload document", "store file"],
+     "responses": ["Upload user file to server"]
+     },
+     {"tag": "Download file",
+     "patterns": ["get file","get data" , "down load file", "download document", "save file"],
+     "responses": ["Download user file from server"]
+      },
+     {"tag": "Get news feed",
+     "patterns": ["look news", "get news", "watch news", "get feed"],
+     "responses": ["Scrap news from favorite resources"]
+      }
+
+    	
+    
+    ]
+}
+
+
+
+  
