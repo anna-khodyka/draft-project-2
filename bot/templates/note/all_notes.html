@@ -12,16 +12,17 @@
         <tr>
 	<td>
 	<b>Note ID:</b> {{res.note_id}}<br>
-	<b>Tags:</b>
-
-		{% if res.tags%}
+		<br>
+		<b>Tags:</b>
+	    {% if res.tags%}
 		<mark>
 			{% for tag in res.tags %}
 				#{{tag}}&nbsp;
 			{% endfor %}
 		</mark>
 		{% endif %}
-		<br>
+		<br><br>
+
 	<b>Text:</b> {{res.text}}
 	</td>
 	</tr>

@@ -5,21 +5,59 @@
 {% endblock %}
 
 {% block header %}
-	Please input keywords and body for the note
+	Please select tags and create the body for a new note
 {% endblock %}
+{% block theader_ %}
+    <tr>
+      <th width = 40%>Select tags you would like connect with note</th>
+      <th width = 60%>Input plain text for the note</th>
+    </tr>
+{% endblock %}
+
 {% block tbody_ %}
-    <form method="POST">	
     	<tr>
-          <td align="left"> 
-            <div align = 'center'><input type="text" name="Keywords"  size="100" value = "Input keywords separated with ','"></div>
-            <p></p>
-	    <div align = 'center'><textarea cols="96" rows = '10' name = "Text">Please type your note here</textarea></div>
-            <p></p>
-            <div align = 'center'><input type="submit" value="Save note"><div>
-	  </td>
-        </td>	   
- </form>	      
+            <form method="POST">
+
+               <td  style = "vertical-align : top;">
+                  {% if tags %}
+                  <div> </div>
+                        {% for tag_ in tags %}
+
+                            <input type="checkbox"
+                                   name="Tags"
+                                   value={{ tag_.tag_id }}
+                                   id = "{{tag_.tag }}"
+                            >
+                   <label for="{{tag_.tag }}">{{ tag_.tag }}</label><br>
+                        {% endfor %}
+                   {% endif%}
+                   <p></p>
+                    <div><input type="submit" value="Save note" style = "width: 100%; vertical-align: bottom; bottom;"></div>
+
+               </td>
+               <td style = "vertical-align : top;">
+                <textarea cols="67" rows = "15" name = "Text">    </textarea>
+
+               </td>
+
+            </form>
+            </tr>
+            <tr>
+                <td>
+                     <form method="POST" action="/note/add_tag">
+                            <input type = "text"  name = "new_tag" style = "width: 97%;" >
+                            <input type="submit"
+                                   value="Create new tag"
+                                       style = "width: 100%; ">
+                </form>
+                </td>
+                <td>
+                    Notes are connected to particular user. Max length = 500 char
+                </td>
+        </tr>
+
 {% endblock%}
+
 
 
                

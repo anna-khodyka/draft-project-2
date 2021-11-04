@@ -11,14 +11,32 @@
     <form method="POST">	
       	       <tr>	
                	       <td align="center"> 
-               	           <div><input type="Keywords" name="Keywords"  size="100" value = "Input keywords separated with ','"></div>
+               	           <div>
+							   <label for="Keywords">Input keywords separated with ','</label>
+							   <input type="Keywords"
+									   id="Keywords"
+									   name="Keywords"
+									   size="100">
+
+						   </div>
                	       </td>
                </tr>
                <tr>
                		<td align="center">
-               		<div><input type="submit" value="Seek note"><div>
+               		<div><input type="submit" value="Seek note"></div>
 			</td>
 	       </tr>	
-    </form>	      
+    </form>
+		   <tr>
+			   <td align = "center">
+				   <br>
+					{% if tags %}
+						{% for tag_ in tags%}
+				   				<a href="/note/find_notes/{{tag_.tag}}/find">
+							   <mark>{{tag_.tag}}</mark> </a>&nbsp;
+						{% endfor %}
+					{% endif %}
+			   </td>
+		   </tr>
 {% endblock%}
 	       

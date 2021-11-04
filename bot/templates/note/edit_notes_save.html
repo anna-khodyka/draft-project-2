@@ -7,23 +7,58 @@
 {% block header %}
 	Please edit keywords and body for the note:
 {% endblock %}
+{% block theader_ %}
+    <tr>
+      <th width = 40%>Select tags you would like connect with note</th>
+      <th width = 60%>Input plain text for the note</th>
+    </tr>
+{% endblock %}
+
 {% block tbody_ %}
-    <form method="POST">	
     	<tr>
-               <td align="center">
-               <p></p>
+            <form method="POST">
+
+               <td  style = "vertical-align : top;">
+                  {% if tags %}
+                  <div> </div>
+                        {% for tag_ in tags %}
+
+                            <input type="checkbox"
+                                   name="Tags"
+                                   value={{ tag_.tag_id }}
+                                   id = "{{tag_.tag }}"
+                                   {% if tag_ in res.tags %} checked {% endif %} >
+                   <label for="{{tag_.tag }}">{{ tag_.tag }}</label><br>
+                        {% endfor %}
+                   {% endif%}
+                   <p></p>
+                    <div><input type="submit" value="Save note" style = "width: 100%; vertical-align: bottom; bottom;"></div>
+
+               </td>
+               <td style = "vertical-align : top;">
                    {% if res %}
-                        <div><input type="text" name="Keywords"  size="100" value = {{res.keywords}}></div>
-                        <p></p>
-                        <div><textarea cols="97" rows = "10" name = "Text">{{res.text}}</textarea></div>
-                        <p></p>
+
+                        <textarea cols="67" rows = "15" name = "Text">{{res.text}}</textarea>
                    {% else %}
-                        <div><input type="text" name="Keywords"  size="100" value = """></div>
-                        <p></p>
-                        <div><textarea cols="97" rows = "10" name = "Text"> " "</textarea></div>
-                        <p></p>
+                        <textarea cols="67" rows = "15" name = "Text">    </textarea>
                    {% endif %}
-               <div><input type="submit" value="Save note"><div>	   
-    </form>	      
+               </td>
+
+            </form>
+            </tr>
+            <tr>
+                <td>
+                     <form method="POST" action="/note/add_tag">
+                            <input type = "text"  name = "new_tag" style = "width: 97%;" >
+                            <input type="submit"
+                                   value="Create new tag"
+                                       style = "width: 100%; ">
+                </form>
+                </td>
+                <td>
+                    Notes are connected to particular user. Max length = 500 char
+                </td>
+        </tr>
+
 {% endblock%}
 

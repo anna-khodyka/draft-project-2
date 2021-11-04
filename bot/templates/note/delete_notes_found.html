@@ -6,23 +6,43 @@
 
 {% block header %}
 	{% if result %}
-		All the notes i have found
-	{% else%}
+		All the notes i have found.
+    {% else%}
 		There is a kind of problem
 	{% endif %}
 {% endblock %}
 
 {% block tbody_ %}
 {% if result%}
+	<form method="POST" action="/note/delete_notes">
+			 <tr>
+				 <td>
+					 <p align="center">Tick the check boxes for notes you would like to delete, and do submit.</p>
+					 <p align="center"> <input type="submit" name="Submit to delete" value="Submit to delete"></p>
+				 </td>
+			 </tr>>
 	{%for res in result %}
               <tr>
-		<td><a href = delete_note/{{res.note_id}}>Note ID: {{res.note_id}}</a>
-       		    <p><b>Keywords:</b> {{res.keywords}}</p>
-	            <p>{{res.text}}</p> 				
-		</td>
+					<td> <input type="checkbox"
+								name="Delete"
+                                value={{ res.note_id }}
+                                id = "{{res.note_id }}">
+			                    <label for="{{res.note_id }}" style="color:red;">Delete note ID {{ res.note_id }}</label><br>
+						<p><b>Tags:</b>
+						{% if res.tags%}
+							<mark>
+								{% for tag in res.tags %}
+									#{{tag}}&nbsp;
+								{% endfor %}
+							</mark>
+						{% endif %}</p>
+						  <p>{{res.text}}</p>
+					</td>
               </tr>
    {%endfor%}
-{% else %}
+	</form>
+
+   {% else %}
         <tr>
 		  <td>
 			  <b>I'm really sorry, but this time I couldn't find any notes by your request.

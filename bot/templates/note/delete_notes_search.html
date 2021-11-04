@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_mono_color.html" %}
 
 {% block title %}
 	Find note to delete
@@ -10,12 +10,32 @@
 {% block tbody_ %}
     <form method="POST">	
       	       <tr>
-               	  <td align="center">
-               	     <div> <input type="Keywords" name="Keywords"  size="100" value = "Input keywords separated with ','"></div>
-              		   <p></p>
-               	           <input type="submit" value="Seek note">
-		      </div>	
-		  </td>
+               	       <td align="center">
+               	           <div>
+							   <label for="Keywords">Input keywords separated with ','</label>
+							   <input type="Keywords"
+									   id="Keywords"
+									   name="Keywords"
+									   size="100">
+
+						   </div>
+               	       </td>
                </tr>
-    </form>	      
+               <tr>
+               		<td align="center">
+               		<div><input type="submit" value="Seek note"></div>
+			</td>
+	       </tr>
+    </form>
+			<tr>
+			   <td align = "center">
+				   <br>
+					{% if tags %}
+						{% for tag_ in tags%}
+				   				<a href="/note/find_notes/{{tag_.tag}}/delete">
+							   <mark>{{tag_.tag}}</mark> </a>&nbsp;
+						{% endfor %}
+					{% endif %}
+			   </td>
+		   </tr>
 {% endblock%}
