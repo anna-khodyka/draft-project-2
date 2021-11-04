@@ -11,7 +11,7 @@ Blueprint init for Flask application Bot
 import sys
 import os
 import warnings
-from flask import redirect, url_for, session, render_template, request
+from flask import redirect, url_for, session, render_template, request, app
 
 
 warnings.filterwarnings("ignore")
@@ -93,7 +93,6 @@ def index():
     """
 
     return redirect(url_for("init.bot"))
-
 
 @init_bp.route("/bot-command", methods=["GET", "POST"])
 def bot():
