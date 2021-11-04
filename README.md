@@ -6,4 +6,12 @@ Just create contact_book database in DBVear and then restore database from this 
 
 For this operation - right click on the database name in left part of window and select Instruments->Restore.
 
-All features are working except Creating and Editing Notes.
+All the new features are working:
+
+    - upload, download, sorting files. files stored in blob fields of PostgresDB
+    - tags added to Notes
+    - news feed from AIOHTTP project integrated to bot
+    - data connected to users, all users have separate scope of contacts and notes  
+
+All test data dumped from database. You could do docker compose with .yaml file enclosed, than restore database from dump using DBVear.
+
