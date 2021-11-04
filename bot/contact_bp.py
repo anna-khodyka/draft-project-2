@@ -31,13 +31,13 @@ if __package__ == "" or __package__ is None:
     from validate import validate_contact_data, form_dict_temp
     import global_var
 else:
-    from contacts_data_classes import (
+    from .contacts_data_classes import (
         ContactbookPSQL,
         ContactDetails,
         ContactPSQL,
         ContactDict,
     )
-    from validate import validate_contact_data, form_dict_temp
+    from .validate import validate_contact_data, form_dict_temp
     from . import global_var
 
 contact_bp = Blueprint("contact", __name__, url_prefix="/contact")
