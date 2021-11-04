@@ -14,7 +14,7 @@ All the new features are working:
     - data connected to users, all users have separate scope of contacts and notes
     - tested the ability to working 2 users at one time (from 2 separate browsers on my laptop)
     
-The feuteres that wouldnt be used for project was deleted:
+The features that wouldnt be used for project was deleted:
 
     - LRUcache on Redis
     - MongoDb data interface
