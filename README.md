@@ -11,7 +11,8 @@ All the new features are working:
     - upload, download, sorting files. files stored in blob fields of PostgresDB
     - tags added to Notes
     - news feed from AIOHTTP project integrated to bot
-    - data connected to users, all users have separate scope of contacts and notes  
+    - data connected to users, all users have separate scope of contacts and notes
+    - tested the ability to working 2 users at one time (from 2 separate browsers on my laptop)
 
 All test data dumped from database. You could do docker compose with .yaml file enclosed, than restore database from dump using DBVear.
 
