@@ -38,7 +38,7 @@ def upload():
         data = request.form.to_dict(flat=False)
         if "file" in request.files:
             file = request.files['file']
-            result = global_var.file_db.insert_file(session['user_id'], file)
+            result = global_var.file_db.insert_file(session['user_id'], file, max_size, total_file, used_file+1)
             if result == 0:
                 return render_template("file/add_file_ok.html")
             return html_error(result)

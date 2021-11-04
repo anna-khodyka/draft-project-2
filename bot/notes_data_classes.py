@@ -117,9 +117,7 @@ class NotebookPSQL(Notebook):
             result = (
                 self.session.query(
                     Note.note_id, Note.user_id, Note.text, Note.created_at
-                )
-                .join(TagsAndNotes).join(Tag)
-                .filter(Note.user_id == user_id,
+                ).filter(Note.user_id == user_id,
                     or_(
                         func.lower(Tag.tag).like(func.lower(f"%{keyword}%")),
                         func.lower(Note.text).like(func.lower(f"%{keyword}%")),
@@ -147,21 +145,43 @@ class NotebookPSQL(Notebook):
         result = (
             self.session.query(
                 Note.note_id, Note.user_id, Note.text, Note.created_at
-            )
-            .join(Text)
-            .filter(Note.note_id == note_id)
-            .first()
+            ).filter(Note.note_id == note_id).first()
         )
         if result:
             tags = self.session.query(
-                Tag.tag
+                Tag.tag, Tag.tag_id
             ).join(TagsAndNotes).filter(TagsAndNotes.note_id == result.note_id).all()
             note = NotePSQL(result)
-            note.tags = [tag_.tag for tag_ in tags]
-            return NotePSQL(result)
+            tag_lst = []
+            for tag_ in tags:
+                tag_lst.append(tag_)
+            res = NotePSQL(result)
+            res.tags = tags
+            return res
         return None
 
-    def update_note(self, note_id, keywords, text):
+    def get_all_tags(self, user_id):
+        result = (
+            self.session.query(
+                Tag.tag, Tag.tag_id
+            ).filter(Tag.user_id == user_id).all()
+        )
+        return result
+
+    def create_tag(self, user_id, note_id, tag):
+        try:
+            print("TRY TO CREATE TAG - ENTER CLASS METHOD")
+            tag = Tag(tag=tag, user_id=user_id)
+            self.session.add(tag)
+            self.session.commit()
+            print("COMMIT")
+            return 0
+        except Exception as error:
+            print(f"ERROR: {error}")
+            return str(error)
+
+
+    def update_note(self, note_id, tags, text):
         """
         Update Note selected by note_id with new keywords and text
         :param note_id: int
@@ -170,29 +190,23 @@ class NotebookPSQL(Notebook):
         :return: 0 if OK or error otherwise
         """
         try:
-            if "," in keywords:
-                keywords = [k.strip() for k in keywords.split(",")]
-            elif " " in keywords:
-                keywords = [k.strip() for k in keywords.split(" ")]
-            else:
-                keywords = [
-                    keywords,
-                ]
             self.session.execute(
-                update(Note, values={Note.keywords: ",".join(keywords)}).filter(
+                update(Note, values={Note.text: text}).filter(
                     Note.note_id == note_id
                 )
             )
-            self.session.execute(
-                update(Text, values={Text.text: text}).filter(Text.note_id == note_id)
-            )
+            sql_stmt = delete(TagsAndNotes).where(TagsAndNotes.note_id == note_id)
+            run_sql(self.session, sql_stmt)
+            for tag in tags:
+                tag_and_note = TagsAndNotes(note_id=note_id, tag_id=int(tag))
+                self.session.add(tag_and_note)
             self.session.commit()
             return 0
         except Exception as error:
             self.session.rollback()
             return error
 
-    def insert_note(self, user_id, keywords, text):
+    def insert_note(self, user_id, tags, text):
         """
         Insert new Note to DB
         :param keywords: str
@@ -200,20 +214,12 @@ class NotebookPSQL(Notebook):
         :return: 0 if OK or error otherwise
         """
         try:
-            if "," in keywords:
-                keywords = [k.strip() for k in keywords.split(",")]
-            elif " " in keywords:
-                keywords = [k.strip() for k in keywords.split(" ")]
-            else:
-                keywords = [
-                    keywords,
-                ]
-
-            note = Note(keywords=",".join(keywords), user_id=user_id, created_at=date.today())
+            note = Note(user_id=user_id, created_at=date.today(), text=text)
             self.session.add(note)
             self.session.commit()
-            text = Text(note_id=note.note_id, text=text)
-            self.session.add(text)
+            for tag in tags:
+                tag_and_note = TagsAndNotes(note_id=note.note_id, tag_id=int(tag))
+                self.session.add(tag_and_note)
             self.session.commit()
             return 0
         except Exception as error:

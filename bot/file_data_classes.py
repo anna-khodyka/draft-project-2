@@ -156,21 +156,27 @@ class FileFolderPSQL(FileFolder):
             return error
 
 
-    def insert_file(self, user_id, file):
+    def insert_file(self, user_id, file, max_size, total_file, used_file):
         try:
             file_type = 'Other'
             content=file.read()
+            size = len(content)
+            size_mb = round(size/1024/1024,2)
+            if size_mb > max_size:
+                raise ValueError(f'File size exceed the limit: {size_mb} vs {max_size} ')
+            if used_file > total_file:
+                raise ValueError(f'User exceed the limit on number of files: {used_file} vs {total_file} ')
             ext = file.filename.rsplit('.', 1)[1].lower()
             for key in extensions_.keys():
                 if ext.upper() in extensions_[key]:
                     file_type = key.capitalize()
             file = File(
-            user_id=user_id,
-            name = file.filename,
-            file_date = datetime.now(),
-            file_length = len(content),
-            file_type = file_type,
-            file=content
+                user_id=user_id,
+                name=file.filename,
+                file_date=datetime.now(),
+                file_length=size,
+                file_type=file_type,
+                file=content
             )
             self.session.add(file)
             self.session.commit()

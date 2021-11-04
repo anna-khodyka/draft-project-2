@@ -135,6 +135,10 @@ class Tag(Base):
         primary_key=True,
     )
     tag = Column(String(20))
+    user_id = Column(
+        Integer,
+        ForeignKey("user_.id", onupdate="CASCADE", ondelete="CASCADE"),
+    )
     note = relationship("TagsAndNotes")
 
 class TagsAndNotes(Base):

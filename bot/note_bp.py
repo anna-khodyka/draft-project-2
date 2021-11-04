@@ -11,7 +11,7 @@ handlers responsible for operations with Notebook
 # local packages
 import os
 import sys
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -49,7 +49,34 @@ def find_notes():
                 if res not in results:
                     results.append(res)
         return render_template("note/find_notes_found.html", result=results)
-    return render_template("note/find_notes_search.html")
+    tags = global_var.note_book.get_all_tags(session['user_id'])
+    return render_template("note/find_notes_search.html", tags=tags)
+
+
+@note_bp.route("/find_notes/<tag>/<target>", methods=["GET", "POST"])
+def find_notes_by_tag(tag, target):
+    results = global_var.note_book.get_notes(session['user_id'], tag)
+    if isinstance(results, str):
+        return html_error(results)
+    if target in ['find', 'edit']:
+        return render_template("note/find_notes_found.html", result=results)
+    elif target in ['delete']:
+        return render_template("note/delete_notes_found.html", result=results)
+
+@note_bp.route("/add_tag", methods=["GET", "POST"])
+def create_tag():
+    print("TRY TO CREATE TAG - START")
+    res = global_var.note_book.create_tag(session['user_id'],
+                                          session['current_note'],
+                                          request.form.get("new_tag")
+                                          )
+    if isinstance(res, str):
+        return html_error(res)
+    if session['current_note']:
+        return redirect(f"save_note/{session['current_note']}")
+    else:
+        return redirect("add_note")
+
 
 
 @note_bp.route("/show_all_notes", methods=["GET"])
@@ -74,15 +101,22 @@ def add_note():
     """
     if request.method == "POST":
         data = request.form.to_dict(flat=False)
-        if "Keywords" not in data or "Text" not in data:
+        if "Text" not in data:
             abort(400, "Wrong request data")
-        res = global_var.note_book.insert_note(session['user_id'],
-            request.form.get("Keywords"), request.form.get("Text")
+        text = request.form.get("Text")
+        if len(text) > 500:
+            text = text[0:500]
+        res = global_var.note_book.insert_note(
+            session['user_id'],
+            request.form.getlist("Tags"),
+            text
         )
         if res == 0:
             return render_template("note/add_note_OK.html")
         return html_error(res)
-    return render_template("note/add_note.html")
+    session['current_note'] = 0
+    tags = global_var.note_book.get_all_tags(session['user_id'])
+    return render_template("note/add_note.html", tags=tags)
 
 
 @note_bp.route("/edit_note", methods=["GET", "POST"])
@@ -104,7 +138,8 @@ def edit_note():
                 if res not in results:
                     results.append(res)
         return render_template("note/find_notes_found.html", result=results)
-    return render_template("note/find_notes_search.html")
+    tags = global_var.note_book.get_all_tags(session['user_id'])
+    return render_template("note/find_notes_search.html", tags=tags)
 
 
 @note_bp.route("/save_note/<note_id>", methods=["GET", "POST"])
@@ -118,17 +153,20 @@ def save_note(note_id):
     """
     if request.method == "POST":
         data = request.form.to_dict(flat=False)
-        if "Keywords" not in data or "Text" not in data:
+        if "Tags" not in data or "Text" not in data:
             abort(400, "Wrong request data")
+        text = request.form.get("Text")
+        if len(text) > 500:
+            text = text[0:500]
         res = global_var.note_book.update_note(
-            note_id, request.form.get("Keywords"), request.form.get("Text")
-        )
+            note_id, request.form.getlist("Tags"), text)
         if res == 0:
             return render_template("note/edit_notes_OK.html")
         return html_error(res)
-
+    tags = global_var.note_book.get_all_tags(session['user_id'])
     result = global_var.note_book.get_note_by_id(note_id)
-    return render_template("note/edit_notes_save.html", res=result)
+    session['current_note'] = note_id
+    return render_template("note/edit_notes_save.html", res=result, tags=tags)
 
 
 @note_bp.route("/delete_note", methods=["GET", "POST"])
@@ -153,7 +191,8 @@ def delete_note():
                 if res not in results:
                     results.append(res)
         return render_template("note/delete_notes_found.html", result=results)
-    return render_template("note/delete_notes_search.html")
+    tags = global_var.note_book.get_all_tags(session['user_id'])
+    return render_template("note/delete_notes_search.html", tags=tags)
 
 
 @note_bp.route("/delete_note/<note_id>", methods=["GET", "POST"])
@@ -167,3 +206,13 @@ def note_delete_(note_id):
     if res == 0:
         return render_template("note/delete_notes_OK.html", id=note_id)
     return html_error(res)
+
+
+@note_bp.route("/delete_notes", methods=["POST"])
+def delete_notes():
+    note_ids = request.form.getlist("Delete")
+    for note_id in note_ids:
+        res = global_var.note_book.delete_note(note_id)
+        if res != 0:
+            return html_error(res)
+    return render_template("note/delete_notes_OK.html", id=note_ids)
