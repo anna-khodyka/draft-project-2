@@ -11,7 +11,6 @@ import sys
 import unittest
 import pytest
 sys.path.append('../')
-from db_mongo import *
 from db_postgres import *
 
 
@@ -28,15 +27,3 @@ def test_connect_to_postgres():
     assert pgsession.query(Text.text).first() is not None
     assert pgsession.query(Email.email).first() is not None
 
-def test_connect_to_mongo():
-    """
-    Testing ability to connect with MongoDB
-    """
-    assert contact_db is not None
-    assert counter_db is not None
-    assert user_db is not None
-    assert note_db is not None
-    assert contact_db.find_one() is not None
-    assert counter_db.find_one() is not None
-    assert user_db.find_one() is not None
-    assert note_db.find_one() is not None

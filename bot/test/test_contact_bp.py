@@ -87,8 +87,6 @@ def test_contact_insert(app, client, data_dict):
     :param data_dict: fixture
     :return:
     """
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
 
     response = client.post('/contact/add_contact', data=data_dict)
     assert b'Contact successfully saved' in response.data, 'is contact successfully saved'
@@ -100,33 +98,6 @@ def test_contact_insert(app, client, data_dict):
     stmt = delete(Contact).where(Contact.name == data_dict['Name'])
     pgsession.execute(stmt)
     pgsession.commit()
-
-
-@pytest.mark.parametrize("data_dict", PARAM_LIST)
-def test_contact_insert_mongo(app, client, data_dict):
-    """
-    Test /contact/add_contact handler for mongo
-    :param app: fixture
-    :param client: fixture
-    :param data_dict: fixture
-    :return:
-    """
-    response = client.post('/DB_select', data={'db': 'mongodb'})
-    assert response.status_code == 302, 'database selected'
-
-    response = client.post('/contact/add_contact', data=data_dict)
-    assert b'Contact successfully saved' in response.data, 'is contact successfully saved'
-
-    response = client.post('/contact/add_contact', data=data_dict)
-    assert b'error' in response.data, 'duplicated records should be prohibited'
-
-    #lets do some cleaning
-    contact_to_delete = contact_db.find_one(
-        {'name': data_dict['Name'],
-         'birthday': datetime.strptime(data_dict['Birthday'], '%Y-%m-%d')})
-    if contact_to_delete:
-        contact = ContactbookMongo(contact_db, counter_db)
-        contact.delete_contact(contact_to_delete['contact_id'])
 
 def test_empty_dict(app, client):
     """
@@ -151,8 +122,6 @@ def test_edit_contact(app, client):
     """
     global TEST_EDIT_DICT
 
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
 
     response = client.get('/contact/edit_contact')
     assert response.status_code == 200
@@ -187,47 +156,6 @@ def test_edit_contact(app, client):
     contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
-
-def test_edit_contact_mongo(app, client):
-    """
-    Test /contact/edit_contact handler for mongo
-    :param app: fixture
-    :param client: fixture
-    :return:
-    """
-    global TEST_EDIT_DICT
-
-    response = client.post('/DB_select', data={'db': 'mongodb'})
-    assert response.status_code == 302, 'database selected'
-
-    response = client.get('/contact/edit_contact')
-    assert response.status_code == 200
-    assert b'Find a contact' in response.data
-
-    response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
-    assert b'Contact successfully saved' in response.data, 'save test contact'
-
-    contacts = ContactbookMongo(contact_db, counter_db)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
-    assert len(contact) == 1
-
-    response = client.get(f'/contact/edit_contact/{contact[0].contact_id}')
-    assert b'Please edit Contact details' in response.data
-
-    TEST_EDIT_DICT["Name"] = 'John Snow snr'
-
-    response = client.post(f'/contact/edit_contact/{contact[0].contact_id}', data = TEST_EDIT_DICT)
-    assert b'Contact successfully saved' in response.data, 'save edited test contact'
-
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
-    assert len(contact) == 1
-
-    contacts.delete_contact(contact[0].contact_id)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
-    assert len(contact) == 0
-
-
-
 def test_find_contact(app, client):
     """
     Test /contact/find_contact handler for postgres
@@ -235,9 +163,6 @@ def test_find_contact(app, client):
     :param client: fixture
     :return:
     """
-
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
 
     response = client.get('/contact/find_contact')
     assert b'Input search string: name or phone or even a part of it' in response.data
@@ -253,9 +178,6 @@ def test_show_all_contact(app, client):
     :return:
     """
 
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
-
     response = client.get('/contact/show_all_contacts')
     assert b'All the contacts from your address book. Click ID to see details' in response.data
 
@@ -264,29 +186,6 @@ def test_show_all_contact(app, client):
 
     response = client.get('/contact/show_all_contacts', data={'some': 'wrong'})
     assert b'All the contacts from your address book. Click ID to see details' in response.data
-
-
-def test_show_all_contact_mongo(app, client):
-    """
-    Test /contact/show_all_contacts handler for mongo
-    :param app: fixture
-    :param client: fixture
-    :return:
-    """
-
-    response = client.post('/DB_select', data={'db': 'mongodb'})
-    assert response.status_code == 302, 'database selected'
-
-    response = client.get('/contact/show_all_contacts')
-    assert b'All the contacts from your address book. Click ID to see details' in response.data
-
-    response = client.post('/contact/show_all_contacts')
-    assert response.status_code == 405
-
-    response = client.get('/contact/show_all_contacts', data={'some': 'wrong'})
-    assert b'All the contacts from your address book. Click ID to see details' in response.data
-
-
 
 def test_contact_detail(app, client):
     """
@@ -297,9 +196,6 @@ def test_contact_detail(app, client):
     """
 
     global TEST_EDIT_DICT
-
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
 
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save test contact'
@@ -318,6 +214,7 @@ def test_contact_detail(app, client):
     contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
+
 def test_next_birthday(app, client):
     """
     Test /contact/next_birthday handler for postgres
@@ -325,29 +222,6 @@ def test_next_birthday(app, client):
     :param client: fixture
     :return:
     """
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
-
-    response = client.post('/contact/next_birthday', data={'Period' : '1'})
-    assert b'Contacts with Birthday at the nearest' in response.data
-
-    response = client.post('/contact/next_birthday', data={'Period' : '-10'})
-    assert b'You could use numbers only, the period should be' in response.data
-
-    response = client.post('/contact/next_birthday', data={'Period' : 'asdasdasd'})
-    assert b'You could use numbers only, the period should be' in response.data
-
-
-def test_next_birthday_mongo(app, client):
-    """
-    Test /contact/next_birthday handler for mongo
-    :param app: fixture
-    :param client: fixture
-    :return:
-    """
-    response = client.post('/DB_select', data={'db': 'mongodb'})
-    assert response.status_code == 302, 'database selected'
-
     response = client.post('/contact/next_birthday', data={'Period' : '1'})
     assert b'Contacts with Birthday at the nearest' in response.data
 

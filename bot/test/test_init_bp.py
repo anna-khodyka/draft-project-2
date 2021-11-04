@@ -74,13 +74,6 @@ def test_before_request(app, client):
     response = client.get('/help_')
     assert response.headers['Location'] == 'http://localhost/DB_select'
 
-    response = client.get('/DB_select')
-    assert response.status_code == 200
-
-    response = client.post('/DB_select', data={'db': 'mongodb'})
-    assert response.status_code == 302
-    assert response.headers['Location'] == 'http://localhost/login/login'
-
     response = client.get('/help_')
     assert response.headers['Location'] == 'http://localhost/login/login'
 
