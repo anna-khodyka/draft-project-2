@@ -62,8 +62,9 @@ def delete_by_id(file_id):
     if request.method == 'POST':
         result = global_var.file_db.delete_file(file_id)
         if result == 0:
-            files = global_var.file_db.get_all_file_names(session['user_id'])
-            return render_template("file/file_to_download.html", files=files)
+            files = global_var.file_db.get_all_file_names(session['user_id'], "")
+            types = global_var.file_db.get_types(session['user_id'])
+            return render_template("file/file_to_download.html", files=files, types=types)
         return html_error(result)
 
 
