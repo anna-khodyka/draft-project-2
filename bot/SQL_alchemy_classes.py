@@ -143,8 +143,8 @@ class Tag(Base):
 
 class TagsAndNotes(Base):
     __tablename__ = 'tags_and_notes'
-    tag_id = Column(ForeignKey('tag.tag_id'), primary_key=True)
-    note_id = Column(ForeignKey('note.note_id'), primary_key=True)
+    tag_id = Column(ForeignKey('tag.tag_id', onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
+    note_id = Column(ForeignKey('note.note_id', onupdate="CASCADE", ondelete="CASCADE"), primary_key=True)
     note = relationship("Note")
 
 
