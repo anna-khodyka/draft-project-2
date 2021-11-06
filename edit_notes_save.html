@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Edit note
+
+{% endblock %}
+
+{% block js%}
+<script type="text/javascript">
+
+    window.onbeforeunload = function() {
+            }
+
+
+    window.onload = function(){
+        console.log('App started');
+        if (sessionStorage){
+            console.log('Restore from local');
+            var text = document.getElementById("note_text");
+            var sessionText = sessionStorage.getItem('note_text');
+            if (sessionText!=null){
+                text.value = sessionStorage.getItem('note_text');
+            }
+        }
+        var tag_form = document.getElementById("tag_form");
+        tag_form.addEventListener("submit", function(e){
+            console.log('Try save to local');
+            var text = document.getElementById("note_text");
+            sessionStorage.setItem('note_text', text.value);
+            console.log('Data save to local');
+        });
+        var note_form = document.getElementById("note_form");
+            console.log('Clear session storage');
+            note_form.addEventListener("submit", function(e){
+            console.log('Clear session storage');
+            sessionStorage.clear();
+        });
+    }
+
+</script>
+
+{% endblock %}
+
+{% block header %}
+	Please edit keywords and body for the note:
+{% endblock %}
+{% block theader_ %}
+    <tr>
+      <th width = 40%>Select tags you would like connect with note</th>
+      <th width = 60%>Input plain text for the note</th>
+    </tr>
+
+{% endblock %}
+
+{% block tbody_ %}
+    	<tr>
+            <form method="POST" id="note_form">
+
+               <td  style = "vertical-align : top;">
+                  {% if tags %}
+                  <div> </div>
+                        {% for tag_ in tags %}
+
+                            <input type="checkbox"
+                                   name="Tags"
+                                   value={{ tag_.tag_id }}
+                                   id = "{{tag_.tag }}"
+                                   {% if tag_ in res.tags %} checked {% endif %} >
+                   <label for="{{tag_.tag }}">{{ tag_.tag }}</label><br>
+                        {% endfor %}
+                   {% endif%}
+                   <p></p>
+                    <div><input type="submit"
+                                value="Save note"
+                                id="note_submit"
+                                style = "width: 100%; vertical-align: bottom; bottom;"
+                                ></div>
+
+               </td>
+               <td style = "vertical-align : top;">
+                   {% if res %}
+
+                        <textarea id = "note_text" cols="67" rows = "15" name = "Text">{{res.text}}</textarea>
+                   {% else %}
+                        <textarea cols="67" rows = "15" name = "Text">    </textarea>
+                   {% endif %}
+               </td>
+
+            </form>
+            </tr>
+            <tr>
+                <td>
+                     <form id="tag_form" method="POST" action="/note/add_tag">
+                            <input type = "text"  name = "new_tag" style = "width: 97%;" >
+                            <input type="submit"
+                                   value="Create new tag"
+                                       style = "width: 100%; ">
+                </form>
+                </td>
+                <td>
+                    Notes are connected to particular user. Max length = 500 char
+                </td>
+        </tr>
+{% endblock%}
+
