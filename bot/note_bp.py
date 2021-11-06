@@ -11,7 +11,9 @@ handlers responsible for operations with Notebook
 # local packages
 import os
 import sys
+import re
 from flask import Blueprint, render_template, request, redirect
+from markupsafe import Markup
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -47,7 +49,11 @@ def find_notes():
                 if isinstance(res, str):
                     return html_error(res)
                 if res not in results:
+                    regex = fr"(?P<to_subst>{k}[\w]*[\ ]?[$]?)"
+                    subst = r"<mark style='background-color: #34d8eb;'>\g<to_subst></mark>"
+                    res.text = Markup(re.sub(regex, subst, res.text, 0, re.MULTILINE | re.I))
                     results.append(res)
+
         return render_template("note/find_notes_found.html", result=results)
     tags = global_var.note_book.get_all_tags(session['user_id'])
     return render_template("note/find_notes_search.html", tags=tags)
@@ -58,6 +64,10 @@ def find_notes_by_tag(tag, target):
     results = global_var.note_book.get_notes(session['user_id'], tag)
     if isinstance(results, str):
         return html_error(results)
+    for i in range(0, len(results)):
+        regex = fr"(?P<to_subst>{tag}[\w]*[\ ]?[$]?)"
+        subst = r"<mark style='background-color: #34d8eb;'>\g<to_subst></mark>"
+        results[i].text = Markup(re.sub(regex, subst, results[i].text, 0, re.MULTILINE | re.I))
     if target in ['find', 'edit']:
         return render_template("note/find_notes_found.html", result=results)
     elif target in ['delete']:

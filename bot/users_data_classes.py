@@ -53,64 +53,6 @@ class ApplicationUser(ABC):
         """
 
 
-class AppUserMongo(ApplicationUser):
-    """
-    Class App User with mongo DB connection
-    """
-
-    def __init__(self, user_db):
-        """
-        Init class instance
-        :param user_db: mongo collection
-        """
-        super().__init__()
-        self.user_db = user_db
-
-    def get_user(self, user_login):
-        """
-        Select User from mongo collection by login
-        :param user_login: str
-        :return: UserMongo
-        """
-        res = self.user_db.find_one({"login": user_login})
-        if res is not None:
-            user = UserMongo(res)
-            return user
-        return res
-
-    def insert_user(self, name, user_login, password):
-        """
-        Insert new User to mongo collection
-        :param name: str
-        :param user_login: str
-        :param password: hashed with secret key str
-        :return: str
-        """
-
-        try:
-            res = self.get_user(user_login)
-            if res == [] or res is None:
-                self.user_db.insert_one(
-                    {"user_name": name, "login": user_login, "password": password}
-                )
-                return None
-            return f"User with login [{user_login}] already exist"
-        except Exception as error:
-            return f"Some problem: {str(error)}"
-
-    def delete_user(self, user_login):
-        """
-        Delete User from mongo collection
-        :param user_login: str
-        :return: 0 or error
-        """
-        try:
-            self.user_db.delete_one({"login": user_login})
-            return 0
-        except Exception as error:
-            return error
-
-
 class AppUserPSQL(ApplicationUser):
     """
     App User with postgres connection

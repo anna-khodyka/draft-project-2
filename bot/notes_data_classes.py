@@ -114,10 +114,11 @@ class NotebookPSQL(Notebook):
         """
         self.notes = []
         if keyword != "":
+
             result = (
                 self.session.query(
                     Note.note_id, Note.user_id, Note.text, Note.created_at
-                ).filter(Note.user_id == user_id,
+                ).outerjoin(TagsAndNotes).outerjoin(Tag).filter(Note.user_id == user_id,
                     or_(
                         func.lower(Tag.tag).like(func.lower(f"%{keyword}%")),
                         func.lower(Note.text).like(func.lower(f"%{keyword}%")),
@@ -170,11 +171,12 @@ class NotebookPSQL(Notebook):
 
     def create_tag(self, user_id, note_id, tag):
         try:
-            print("TRY TO CREATE TAG - ENTER CLASS METHOD")
-            tag = Tag(tag=tag, user_id=user_id)
-            self.session.add(tag)
-            self.session.commit()
-            print("COMMIT")
+            if self.session.query(Tag.tag).filter(Tag.tag==tag, Tag.user_id == user_id).first() is None:
+                print("TRY TO CREATE TAG - ENTER CLASS METHOD")
+                tag = Tag(tag=tag, user_id=user_id)
+                self.session.add(tag)
+                self.session.commit()
+                print("COMMIT")
             return 0
         except Exception as error:
             print(f"ERROR: {error}")
@@ -197,9 +199,10 @@ class NotebookPSQL(Notebook):
             )
             sql_stmt = delete(TagsAndNotes).where(TagsAndNotes.note_id == note_id)
             run_sql(self.session, sql_stmt)
-            for tag in tags:
-                tag_and_note = TagsAndNotes(note_id=note_id, tag_id=int(tag))
-                self.session.add(tag_and_note)
+            if tags:
+                for tag in tags:
+                    tag_and_note = TagsAndNotes(note_id=note_id, tag_id=int(tag))
+                    self.session.add(tag_and_note)
             self.session.commit()
             return 0
         except Exception as error:
