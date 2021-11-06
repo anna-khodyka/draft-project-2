@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+	{% block js %}{% endblock %}
 </head>
 
 <style> 
 	table, th, td, tr { 
     		border: 1px solid black;
     		border-collapse: collapse;
-		  	 		  }
+    		font-family:arial, sans-serif;
+          	 		  }
 	table { width: 50%;
 		margin: auto;
 		}
+
+	 textarea {font-family:arial, sans-serif;
+						font-size: 14px;}
+
+	checkbox, label {font-family:arial, sans-serif;
+						font-size: 12px;}
 
 	tr:nth-child(odd) {
   		background-color: #BFC9CA;
