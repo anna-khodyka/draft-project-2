@@ -7,15 +7,18 @@ Testing login blueprint for flask app 'bot'
 #pylint: disable=W0401
 #pylint: disable=C0413
 
+from login_bp import *
+from init_bp import *
+from global_var import *
+from db_postgres import pgsession
+from flask import redirect, url_for, session, render_template, request, app
+
 import sys
 import os
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 sys.path.append('../')
-
-from init_bp import *
-from login_bp import *
 
 
 def test_login_postgres(app, client):
@@ -25,27 +28,41 @@ def test_login_postgres(app, client):
     :param client: fixture
     :return:
     """
+    app.before_request_funcs[None] = [before_request]
 
-    response = client.post('/login/login', data={'Login': 'test', 'Password': 'test'})
+    response = client.get('/login/register')
+    response = client.post('/login/register', data={'User_name': 'test',
+                                                    'Login': 'test',
+                                                    'Password': 'test'})
+
+    response = client.post('/login/login', data={'Login': 'test',
+                                                 'Password': 'test'})
     assert response.headers['Location'] == 'http://localhost/bot-command'
 
-    response = client.post('/login/login', data={'Login': 'test', 'Password': 'wrong'})
+    response = client.post('/login/login', data={'Login': 'test',
+                                                 'Password': 'wrong'})
     assert b'Incorrect password' in response.data
 
-    response = client.post('/login/login', data={'Login': 'wrong', 'Password': 'wrong'})
+    response = client.post(
+        '/login/login', data={'Login': 'wrong', 'Password': 'wrong'})
     assert b'Incorrect login' in response.data
 
 
 def test_logout(app, client):
     """
-    Testing the /login/logout handler for mongo
+    Testing the /login/logout handler
     :param app: fixture
     :param client: fixture
     :return:
     """
     app.before_request_funcs[None] = [before_request]
 
-    response = client.post('/login/login', data={'Login': 'test', 'Password': 'test'})
+    response = client.get('/login/register')
+    response = client.post('/login/register', data={'User_name': 'test',
+                                                    'Login': 'test',
+                                                    'Password': 'test'})
+    response = client.post(
+        '/login/login', data={'Login': 'test', 'Password': 'test'})
     assert response.headers['Location'] == 'http://localhost/bot-command'
 
     response = client.post('/bot-command', data={'BOT command': 'help'})
@@ -72,12 +89,24 @@ def test_register_postgres(app, client):
     response = client.get('/login/register')
     assert b'Register user' in response.data
 
-    users_db = AppUserPSQL(pgsession)
+    app.before_request_funcs[None] = [before_request]
+
+    response = client.get('/login/register')
+    assert b'login' in response.data
+
+    assert global_var.users_db is not None
+
+    assert not global_var.users_db.insert_user(
+        'test_db_method', "test_db_method", generate_password_hash('test_db_method'))
+    assert global_var.users_db.get_user(
+        'test_db_method').user_name == 'test_db_method'
+    assert global_var.users_db.delete_user('test_db_method') == 0
 
     response = client.post('/login/register', data={'User_name': 'pytest',
                                                     'Login': 'pytest',
                                                     'Password': 'pytest'})
-    assert users_db.get_user('pytest').user_name == 'pytest'
+
+    assert global_var.users_db.get_user('pytest').user_name == 'pytest'
 
     response = client.post('/login/register', data={'User_name': 'pytest',
                                                     'Login': 'pytest',
@@ -88,4 +117,4 @@ def test_register_postgres(app, client):
                                                  'Password': 'pytest'})
     assert response.headers['Location'] == 'http://localhost/bot-command'
 
-    assert users_db.delete_user('pytest') == 0
+    assert global_var.users_db.delete_user('pytest') == 0

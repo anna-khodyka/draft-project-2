@@ -20,12 +20,13 @@ faker = faker.Faker()
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 sys.path.append('../')
-from init_bp import *
+if True:
+    from init_bp import *
 
 
 PARAM_LIST = []
 empty_dict = {
-            "Name": '',
+    "Name": '',
             "Birthday": '',
             "Email": '',
             "Phone": '',
@@ -36,21 +37,21 @@ empty_dict = {
             "Street": '',
             "House": '',
             "Apartment": ''
-            }
+}
 
 TEST_EDIT_DICT = {
-        "Name": 'John Snow jnr',
-        "Birthday": '1900-10-10',
-        "Email": 'snow@westeros.com',
-        "Phone": '380506709090',
-        "ZIP": '090',
-        "Country": 'Westeros',
-        "Region": '',
-        "City": '',
-        "Street": '',
-        "House": '',
-        "Apartment": ''
-    }
+    "Name": 'John Snow jnr',
+    "Birthday": '1900-10-10',
+    "Email": 'snow@westeros.com',
+    "Phone": '380506709090',
+    "ZIP": '090',
+    "Country": 'Westeros',
+    "Region": '',
+    "City": '',
+    "Street": '',
+    "House": '',
+    "Apartment": ''
+}
 
 
 def fill_param():
@@ -59,7 +60,7 @@ def fill_param():
     :return:
     """
     global PARAM_LIST
-    for i in range(1,10):
+    for i in range(1, 10):
         test_dict = {
             "Name": faker.name(),
             "Birthday": faker.date(),
@@ -72,14 +73,15 @@ def fill_param():
             "Street": faker.street_name(),
             "House": faker.building_number(),
             "Apartment": faker.building_number()
-            }
+        }
         PARAM_LIST.append(test_dict)
+
 
 fill_param()
 
 
 @pytest.mark.parametrize("data_dict", PARAM_LIST)
-def test_contact_insert(app, client, data_dict):
+def test_contact_insert(app, client, auth_test, data_dict):
     """
     Test /contact/add_contact handler for postgres
     :param app: fixture
@@ -87,6 +89,7 @@ def test_contact_insert(app, client, data_dict):
     :param data_dict: fixture
     :return:
     """
+    auth_test.login()
 
     response = client.post('/contact/add_contact', data=data_dict)
     assert b'Contact successfully saved' in response.data, 'is contact successfully saved'
@@ -94,26 +97,26 @@ def test_contact_insert(app, client, data_dict):
     response = client.post('/contact/add_contact', data=data_dict)
     assert b'error' in response.data, 'duplicated records should be prohibited'
 
-    #lets do some cleaning
+    # lets do some cleaning
     stmt = delete(Contact).where(Contact.name == data_dict['Name'])
     pgsession.execute(stmt)
     pgsession.commit()
 
-def test_empty_dict(app, client):
+
+def test_empty_dict(app, client, auth_test):
     """
         Test /contact/add_contact handler with empty client for postgres
         :param app: fixture
         :param client: fixture
         :return:
         """
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
+    auth_test.login()
 
     response = client.post('/contact/add_contact', data=empty_dict)
     assert b'Create new contact' in response.data
 
 
-def test_edit_contact(app, client):
+def test_edit_contact(app, client, auth_test):
     """
     Test /contact/edit_contact handler for postgres
     :param app: fixture
@@ -122,6 +125,7 @@ def test_edit_contact(app, client):
     """
     global TEST_EDIT_DICT
 
+    auth_test.login()
 
     response = client.get('/contact/edit_contact')
     assert response.status_code == 200
@@ -130,9 +134,8 @@ def test_edit_contact(app, client):
     response = client.post('/contact/edit_contact')
     assert response.status_code == 400
 
-    response = client.post('/contact/edit_contact', data={'Keywords':'man'})
-    assert b'Contacts by your request: click on ID to edit contact' in response.data
-
+    response = client.post('/contact/edit_contact', data={'Keywords': 'man'})
+    assert b' find any contact' in response.data
 
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save test contact'
@@ -146,7 +149,8 @@ def test_edit_contact(app, client):
 
     TEST_EDIT_DICT["Name"] = 'John Snow snr'
 
-    response = client.post(f'/contact/edit_contact/{contact[0].contact_id}', data = TEST_EDIT_DICT)
+    response = client.post(
+        f'/contact/edit_contact/{contact[0].contact_id}', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save edited test contact'
 
     contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
@@ -156,27 +160,32 @@ def test_edit_contact(app, client):
     contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
-def test_find_contact(app, client):
+
+def test_find_contact(app, client, auth_test):
     """
     Test /contact/find_contact handler for postgres
     :param app: fixture
     :param client: fixture
     :return:
     """
+    auth_test.login()
 
     response = client.get('/contact/find_contact')
     assert b'Input search string: name or phone or even a part of it' in response.data
 
-    response = client.post('/contact/find_contact', data={'Keywords':'man'})
+    response = client.post('/contact/find_contact', data={'Keywords': 'man'})
     assert b'Contacts by your request: click on ID to edit contact' in response.data
 
-def test_show_all_contact(app, client):
+
+def test_show_all_contact(app, client, auth_test):
     """
     Test /contact/show_all_contacts handler for postgres
     :param app: fixture
     :param client: fixture
     :return:
     """
+
+    auth_test.login()
 
     response = client.get('/contact/show_all_contacts')
     assert b'All the contacts from your address book. Click ID to see details' in response.data
@@ -187,7 +196,8 @@ def test_show_all_contact(app, client):
     response = client.get('/contact/show_all_contacts', data={'some': 'wrong'})
     assert b'All the contacts from your address book. Click ID to see details' in response.data
 
-def test_contact_detail(app, client):
+
+def test_contact_detail(app, client, auth_test):
     """
     Test /contact/add_contact handler for postgres
     :param app: fixture
@@ -196,6 +206,8 @@ def test_contact_detail(app, client):
     """
 
     global TEST_EDIT_DICT
+
+    auth_test.login()
 
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save test contact'
@@ -215,35 +227,40 @@ def test_contact_detail(app, client):
     assert len(contact) == 0
 
 
-def test_next_birthday(app, client):
+def test_next_birthday(app, client, auth_test):
     """
     Test /contact/next_birthday handler for postgres
     :param app: fixture
     :param client: fixture
     :return:
     """
-    response = client.post('/contact/next_birthday', data={'Period' : '1'})
+    auth_test.login()
+
+    response = client.post('/contact/next_birthday', data={'Period': '1'})
     assert b'Contacts with Birthday at the nearest' in response.data
 
-    response = client.post('/contact/next_birthday', data={'Period' : '-10'})
+    response = client.post('/contact/next_birthday', data={'Period': '-10'})
     assert b'You could use numbers only, the period should be' in response.data
 
-    response = client.post('/contact/next_birthday', data={'Period' : 'asdasdasd'})
+    response = client.post('/contact/next_birthday',
+                           data={'Period': 'asdasdasd'})
     assert b'You could use numbers only, the period should be' in response.data
 
 
-def test_delete_contact(app, client):
+def test_delete_contact(app, client, auth_test):
     """
     Test /contact/delete_contact handler for postgres
     :param app: fixture
     :param client: fixture
     :return:
     """
+    auth_test.login()
+
     response = client.get('/contact/delete_contact')
     assert response.status_code == 200
     assert b'Select contact to delete' in response.data
 
-    response = client.post('/contact/delete_contact', data={'Keywords' : 'man'})
+    response = client.post('/contact/delete_contact', data={'Keywords': 'man'})
     assert response.status_code == 200
     assert b'Found contacts to delete' in response.data
 
@@ -252,8 +269,8 @@ def test_delete_contact(app, client):
 
     global TEST_EDIT_DICT
 
-    response = client.post('/DB_select', data={'db': 'postgres'})
-    assert response.status_code == 302, 'database selected'
+    # response = client.post('/DB_select', data={'db': 'postgres'})
+    # assert response.status_code == 302, 'database selected'
 
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save test contact'
@@ -275,5 +292,6 @@ def test_delete_contact(app, client):
     response = client.get(f'/contact/delete_contact/{"asdasdasd"}')
     assert b'error' in response.data
 
-    response = client.get(f'/contact/delete_contact/{100000000000000000100000000000}')
+    response = client.get(
+        f'/contact/delete_contact/{100000000000000000100000000000}')
     assert b'error' in response.data
