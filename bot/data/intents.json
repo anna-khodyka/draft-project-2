@@ -57,13 +57,19 @@
      "responses": ["Logout for current user"]
      },
      {"tag": "Upload file",
-     "patterns": ["Up load file","load data" , "store file", "put file", "upload image", "upload document", "store file"],
+     "patterns": ["Upload file", "store file", "put file", "upload image", "upload document", "store file", "load file"],
      "responses": ["Upload user file to server"]
      },
      {"tag": "Download file",
-     "patterns": ["get file","get data" , "down load file", "download document", "save file"],
+     "patterns": ["get file","get data" , "download file", "download document", "save file"],
      "responses": ["Download user file from server"]
       },
+
+      {"tag": "Delete file",
+     "patterns": ["delete file","erase file" , "clear file", "clear disk"],
+     "responses": ["Download user file from server"]
+      },
+
      {"tag": "Get news feed",
      "patterns": ["look news", "get news", "watch news", "get feed"],
      "responses": ["Scrap news from favorite resources"]
