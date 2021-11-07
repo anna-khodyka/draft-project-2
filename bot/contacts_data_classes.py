@@ -100,7 +100,7 @@ class ContactbookPSQL(Contactbook):
     def __init__(self, pg_session=None):
         """
         Init class instance with connection to PostgreSQL
-        :param session: pgsession
+        :param pg_session pgsession
         """
         super().__init__()
         self.contacts = []
@@ -145,10 +145,9 @@ class ContactbookPSQL(Contactbook):
                         Contact.birthday,
                     )
                     .outerjoin(Phone)
-                    .filter(
-                        or_(Contact.user_id == user_id,
-                            func.lower(Contact.name).like(func.lower(f"%{key}%")),
-                            func.lower(Phone.phone).like(func.lower(f"%{key}%")),
+                    .filter(Contact.user_id == user_id,
+                            or_(func.lower(Contact.name).like(func.lower(f"%{key}%")),
+                                func.lower(Phone.phone).like(func.lower(f"%{key}%")),
                         )
                     )
                     .distinct()
@@ -171,11 +170,11 @@ class ContactbookPSQL(Contactbook):
         try:
             contact = self.session.query(
                 Contact.contact_id, Contact.user_id, Contact.name, Contact.birthday
-            ).filter(Contact.contact_id == contact_id)
+            ).filter(Contact.contact_id == contact_id).first()
             phone = self.session.query(Phone.phone).filter(Phone.contact_id == contact_id)
-            email = self.session.query(Email.email).filter(Email.contact_id == contact_id)
-            address = self.session.query(Address).filter(Address.contact_id == contact_id)
-            return ContactDetails(contact[0], phone, email[0], address[0])
+            email = self.session.query(Email.email).filter(Email.contact_id == contact_id).first()
+            address = self.session.query(Address).filter(Address.contact_id == contact_id).first()
+            return ContactDetails(contact, phone, email, address)
         except Exception as error:
             return str(error)
 
@@ -194,21 +193,23 @@ class ContactbookPSQL(Contactbook):
             res_list = []
             result = (
                 self.session.query(Contact.contact_id, Contact.user_id, Contact.name, Contact.birthday)
-                .filter(Contact.user_id == user_id,
+                .filter(Contact.user_id == user_id, Contact.birthday != None,
                     func.substr(func.to_char(Contact.birthday, "YYYY-mm-dd"), 6, 10).like(
                         any_(days)
                     )
                 )
                 .all()
             )
+            print([res.name for res in result])
             for res in result:
                 res_list.append(res)
             res_list = sorted(res_list, key=self.distance)
+            bd_list = []
             for res in res_list:
                 contact = ContactPSQL(res)
                 contact.celebrate = res.birthday.strftime("%d.%m")
-                self.contacts.append(contact)
-            return self.contacts
+                bd_list.append(contact)
+            return bd_list
         except Exception as error:
             return str(error)
 
@@ -259,28 +260,36 @@ class ContactbookPSQL(Contactbook):
             stmt = delete(Phone).where(Phone.contact_id == contact_id)
             self.session.execute(stmt)
             self.session.commit()
-            for phone_num in contact.phone:
-                phone = Phone(contact_id=contact_id, phone=phone_num)
-                self.session.add(phone)
+            if contact.phone != ['']:
+                for phone_num in [phone_.strip() for phone_ in contact.phone]:
+                    phone = Phone(contact_id=contact_id, phone=phone_num)
+                    self.session.add(phone)
+                    self.session.commit()
             stmt = delete(Address).where(Address.contact_id == contact_id)
             self.session.execute(stmt)
-            address = Address(
-                zip=contact.zip,
-                country=contact.country,
-                region=contact.region,
-                city=contact.city,
-                street=contact.street,
-                house=contact.house,
-                apartment=contact.apartment,
-                contact_id=contact_id,
-            )
-            email = Email(email=contact.email, contact_id=contact_id)
-            self.session.add(address)
+            self.session.commit()
+            addr_set = {contact.zip, contact.country, contact.region, contact.city, contact.street, contact.house,
+                        contact.apartment}
+            if addr_set != {''}:
+                address = Address(
+                    zip=contact.zip,
+                    country=contact.country,
+                    region=contact.region,
+                    city=contact.city,
+                    street=contact.street,
+                    house=contact.house,
+                    apartment=contact.apartment,
+                    contact_id=contact_id,
+                )
+                self.session.add(address)
+                self.session.commit()
             stmt = delete(Email).where(Email.contact_id == contact_id)
             self.session.execute(stmt)
             self.session.commit()
-            self.session.add(email)
-            self.session.commit()
+            if contact.email:
+                email = Email(email=contact.email, contact_id=contact_id)
+                self.session.add(email)
+                self.session.commit()
             return 0
         except Exception as error:
             self.session.rollback()
@@ -296,32 +305,40 @@ class ContactbookPSQL(Contactbook):
             contact_ = Contact(
                 name=contact.name,
                 created_at=date.today(),
-                birthday=contact.birthday,
+                birthday=contact.birthday if contact.birthday else None,
                 user_id=user_id
             )
             self.session.add(contact_)
             self.session.commit()
-        except Exception as error:
-            self.session.rollback()
-            return error
-        try:
-            for phone_num in [phone_.strip() for phone_ in contact.phone]:
-                phone = Phone(contact_id=contact_.contact_id, phone=phone_num)
-                self.session.add(phone)
-            address = Address(
-                zip=contact.zip,
-                country=contact.country,
-                region=contact.region,
-                city=contact.city,
-                street=contact.street,
-                house=contact.house,
-                apartment=contact.apartment,
-                contact_id=contact_.contact_id,
-            )
-            email = Email(email=contact.email, contact_id=contact_.contact_id)
-            self.session.add(address)
-            self.session.add(email)
-            self.session.commit()
+            if contact.phone != ['']:
+                for phone_num in [phone_.strip() for phone_ in contact.phone]:
+                    phone = Phone(contact_id=contact_.contact_id, phone=phone_num)
+                    self.session.add(phone)
+                    self.session.commit()
+            addr_set = set([contact.zip,
+                            contact.country,
+                            contact.region,
+                            contact.city,
+                            contact.street,
+                            contact.house,
+                            contact.apartment])
+            if addr_set != {''}:
+                address = Address(
+                    zip=contact.zip,
+                    country=contact.country,
+                    region=contact.region,
+                    city=contact.city,
+                    street=contact.street,
+                    house=contact.house,
+                    apartment=contact.apartment,
+                    contact_id=contact_.contact_id,
+                )
+                self.session.add(address)
+                self.session.commit()
+            if contact.email:
+                email = Email(email=contact.email, contact_id=contact_.contact_id)
+                self.session.add(email)
+                self.session.commit()
         except Exception as error:
             self.session.rollback()
             return error
@@ -358,7 +375,7 @@ class ContactPSQL(ContactAbstract):
         self.contact_id = contact.contact_id
         self.user_id = contact.user_id
         self.name = contact.name
-        self.birthday = contact.birthday.strftime("%d.%m.%Y")
+        self.birthday = contact.birthday.strftime("%d.%m.%Y") if contact.birthday else None
         self.celebrate = ""
 
 
@@ -372,14 +389,14 @@ class ContactDetails(ContactPSQL):
         self.phone = []
         for phone in phones:
             self.phone.append(phone.phone)
-        self.email = email.email
-        self.zip = address.zip
-        self.country = address.country
-        self.region = address.region
-        self.city = address.city
-        self.street = address.street
-        self.house = address.house
-        self.apartment = address.apartment
+        self.email = email.email if email else ""
+        self.zip = address.zip if address else ""
+        self.country = address.country if address else ""
+        self.region = address.region if address else ""
+        self.city = address.city if address else ""
+        self.street = address.street if address else ""
+        self.house = address.house if address else ""
+        self.apartment = address.apartment if address else ""
         self.celebrate = ""
 
 
