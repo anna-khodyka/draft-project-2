@@ -27,21 +27,20 @@
               <select name="file_type" id = "file_type"  size="1" style= "width:120px;">
                     <option value ='All types'>All types</option>
                   {% if types%}
-                {% for type in types %}
-                     <option value ={{type | safe }}>{{type |safe }}</option>
-                {% endfor %}
-              {% endif %}
+                    {% for type in types %}
+                         <option value ={{type | safe }}>{{type |safe }}</option>
+                    {% endfor %}
+                  {% endif %}
               </select>
               <p></p>
               <input type = submit value="Filter files by type" id = 'filter_files'>
-      </form>
+          </form>
       </th>
 
       <th width = 40%>Name</th>
       <th width = 20%>Size</th>
       <th width = 10%> </th>
       <th width = 10%> </th>
-
     </tr>
 {% endblock %}
 
@@ -89,5 +88,7 @@
 
 		</tr>
 {% endif %}
+
 {% endblock%}
+
 

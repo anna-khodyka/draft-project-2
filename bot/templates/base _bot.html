@@ -5,22 +5,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<style> 
-	table, th, td, tr { 
-    		border: 1px solid black;
-    		border-collapse: collapse;
-		  	 		  }
-	table { width: 50%;
-		margin: auto;
-		}
-
-	tr:nth-child(odd) {
-  		background-color: #BFC9CA;
-                           }
-	th, td {
-  		padding: 5px;
-		}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 <h2 align = "center">{% block header %} {% endblock %}</h2>
 <p></p>
@@ -40,4 +25,5 @@
 	{% block links %}{% endblock %}
 	
 </div>
+<br>
 </html>

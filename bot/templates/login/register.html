@@ -1,68 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Register user</title>
 </head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+<h2 align = 'center'>Please input user details:</h2>
 <form method="POST" name="Register">
   <table width = 50% align = 'center'>
     <tbody>
-      <tr>
-        <td align="left"> 
-          <div> </div>
-        </td>
-        <td align="left"> 
-          <div><h2>Please input user details:</h2><div>
-        </td>
-     </tr>
+    {% if get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
      <tr>
-       <td></td> 
+       <td></td>
        <td>
-         {% with messages = get_flashed_messages() %}
-         	{% if messages %}
-         		<ul class=flashes>
-    			{% for message in messages %}
-      				<li>{{ message }}</li>
-    			{% endfor %}
-    			</ul>
-  		{% endif %}
-	{% endwith %}	
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
        </td>		
-     </tr>	 
+     </tr>
+    {% endwith %}
+    {% endif %}
      <tr>
-        <td align="left"> 
-          <div>User name</div>
-        </td>
-        <td align="left"> 
-          <div><input type="text" name="User_name"  size="50" ></div>
-        </td>
-       </tr>
-     <tr>
-        <td align="left"> 
-          <div>Login</div>
-        </td>
-        <td align="left"> 
-          <div><input type="text" name="Login"  size="50" ></div>
-        </td>
-       </tr>
-     <tr>
-       <td>
-	 <div>Password</div>
-       </td>   			
-       <td align="left"> 
-            <div><input type="password" name="Password"  size="50"></div>
-       </td>
+        <td>User name</td>
+        <td><input type="text" name="User_name"  size="50" ></td>
      </tr>
      <tr>
-       <td>
-	 <div></div>
-       </td>   			
-       <td align="left"> 
-            <div><input type="submit" value="Register user"><div>
-       </td>
-     </tr>   	
+        <td>Login</td>
+        <td><input type="text" name="Login"  size="50" ></td>
+       </tr>
+     <tr>
+       <td>Password</td>
+       <td><input type="password" name="Password"  size="50"></td>
+     </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Register user"></td>
+    </tr>
     </tbody>
   </table> 
   </form>
+<br>
 </html>
