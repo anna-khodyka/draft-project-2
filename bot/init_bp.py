@@ -143,9 +143,10 @@ exec_command = {
         "next birthday: Let you the contacts with birthdays in specified period",
     ],
     "logout": ["login.logout", "user logout: change active user"],
-    "Upload file": ["file.upload", "Upload file to server"],
-    "Download file": ["file.download", "Download file from server"],
-    "Get news feed": ["news.get_news", "View user news feed"],
+    "Upload file": ["file.upload", "upload file: Upload file to server"],
+    "Download file": ["file.download", "download file: Download file from server"],
+    "Delete file": ["file.download", "delete file: Delete file from server"],
+    "Get news feed": ["news.get_news", "get news feed:View user news feed"],
 }
 
 
