@@ -44,7 +44,10 @@
             <div>Birthday</div>
         </td> 
         <td align="left"> 
-            <div><input type="date" name="Birthday"  size="20" value = '{{form_dict['Birthday']['value']}}'></div>
+            <div><input type="date" name="Birthday"  size="20"
+                          {% if form_dict['Birthday']['value'] %}
+                                value = {{form_dict['Birthday']['value'].strftime('%Y-%m-%d')}}></div>
+                          {% endif %}</div>
             <div style="color:red;">{{form_dict['Birthday']['error_message']}}</div>
          </td>
       </tr>
