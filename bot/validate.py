@@ -79,6 +79,8 @@ def birthday_checker(birthday):
     """
     if not isinstance(birthday, str):
         valid = False
+    if birthday == "":
+        valid = True
     elif re.search(r"\d{4}\-\d{2}\-\d{2}", birthday) is None:
         valid = False
     else:
@@ -119,10 +121,14 @@ def zip_checker(zip_code):
     :param zip_code: str
     :return: valid: boolean, error: str, zip_code: str
     """
+    print("-" * 10)
+    print(zip_code)
     error_message = ""
     valid = True
     if not isinstance(zip_code, str):
         valid = False
+    elif zip_code == "":
+        valid = True
     elif len(zip_code) > 10:
         error_message = "Max len of ZIP is 10 char"
         valid = False
@@ -178,9 +184,9 @@ def str_check(str_, len_, name):
     elif str_ == "":
         valid = True
         error_message = ""
-    elif re.search(r"[^a-zA-Z\-0-9\ \.\,\(\)\'\"\&]", str_):
+    elif re.search(r"[^a-zA-Zа-яА-ЯіІїЇєЄ\-0-9\ \.\,\(\)\'\"\&]", str_):
         error_message = f"{name} should not contain any special characters"
-        str_ = re.sub(r"[^a-zA-Z\-0-9\ \.\,\(\)\'\"\&]", "", str_)
+        str_ = re.sub(r"[^a-zA-Zа-яА-ЯіІїЇєЄ\-0-9\ \.\,\(\)\'\"\&]", "", str_)
         valid = False
     return (valid, error_message, str_)
 
@@ -202,7 +208,7 @@ def number_check(num_, len_, name):
     elif num_ == "":
         valid = True
         error_message = ""
-    elif not re.search(r"[\d]+[-\/.]*[a-zA-Z]*", num_):
+    elif not re.search(r"[\d]+[-\/.]*[a-zA-Zа-яА-Я]*", num_):
         error_message = f"{name} should be: [0-9][ - . /][ a-zA-Z]"
         valid = False
     return (valid, error_message, num_)
@@ -263,7 +269,7 @@ form_dict_temp = {
         "error_message": "",
     },
     "Birthday": {
-        "value": "Hint: Use dd.mm.yyyy format",
+        "value": "",
         "valid": True,
         "checker": birthday_checker,
         "error_message": "",

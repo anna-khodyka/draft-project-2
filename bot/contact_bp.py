@@ -152,9 +152,11 @@ def edit_contact_(contact_id):
 
     else:
         contact = global_var.contact_book.get_contact_details(contact_id)
+        if isinstance(contact, str):
+            return html_error(contact)
         form_dict["Name"]["value"] = contact.name
         form_dict["Birthday"]["value"] = (
-            datetime.strptime(contact.birthday, "%d.%m.%Y").date().strftime("%Y-%m-%d")
+            datetime.strptime(contact.birthday, "%d.%m.%Y") if contact.birthday else ""
         )
         form_dict["Email"]["value"] = contact.email
         form_dict["Phone"]["value"] = ", ".join(list(contact.phone))
@@ -285,3 +287,13 @@ def contact_delete_(contact_id):
     if res == 0:
         return render_template("contact/contact_delete_OK.html", id=contact_id)
     return html_error(res)
+
+
+@contact_bp.route("/delete_contacts", methods=["POST"])
+def delete_contacts():
+    contact_ids = request.form.getlist("Delete")
+    for contact_id in contact_ids:
+        res = global_var.contact_book.delete_contact(contact_id)
+        if res != 0:
+            return html_error(res)
+    return render_template("contact/contact_delete_OK.html", id=contact_ids)
