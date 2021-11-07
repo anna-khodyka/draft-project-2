@@ -6,14 +6,13 @@
 """
 Define fixtures for testing Flask application Bot
 """
-
-
-from ..main import init_app  # add .. to execute from test folder
 import sys
 import pytest
 from faker import Faker
-
 sys.path.append('../')
+if True:
+    from main import init_app  # to execute from test folder
+    from init_bp import *
 fake = Faker()
 
 
@@ -56,22 +55,24 @@ def runner(app):
 # c приложения Виталия
 
 
-# class AuthActions:
-#     def __init__(self, client):
-#         self._client = client
+class AuthActions:
+    def __init__(self, app, client):
+        self._app = app
+        self._client = client
 
-#     def login(self, username='test', password='test'):
-#         # добавить регистрацию
+    def login(self):
+        self._app.before_request_funcs[None] = [before_request]
+        # self._client.get('/login/register')
+        self._client.post('/login/register', data={'User_name': 'test',
+                                                   'Login': 'test',
+                                                   'Password': 'test'})
+        return self._client.post('/login/login', data={'Login': 'test',
+                                                       'Password': 'test'})
 
-#         return self._client.post(
-#             '/auth/login',
-#             data={'username': username, 'password': password}
-#         )
-
-#     def logout(self):
-#         return self._client.get('/auth/logout')
+    def logout(self):
+        return self._client.get('/login/logout')
 
 
-# @pytest.fixture(scope='function')
-# def auth_test(client):
-#     return AuthActions(client)
+@pytest.fixture(scope='function')
+def auth_test(app, client):
+    return AuthActions(app, client)
