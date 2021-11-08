@@ -11,12 +11,11 @@
 		There is a kind of problem
 	{% endif %}
 {% endblock %}
-{% block tbody_ %}
+{% block supertable  %}
 {% if result %}
 	{%for res in result %}
-        	<tr>
-		  <td>
-		    <p><b>Note ID:</b>  {{res.note_id}}</p>
+<div class="record-note">
+		    <b>Note ID:</b>  {{res.note_id}}</>
        		    <p><b>Tags:</b> {% if res.tags%}
 		<mark>
 			{% for tag in res.tags %}
@@ -41,9 +40,8 @@
 						</td>
 					</tr>
 				</table>
-		  </td>
-		</tr>
-   {% endfor %}
+</div>
+{% endfor %}
 {% else %}
         <tr>
 		  <td>

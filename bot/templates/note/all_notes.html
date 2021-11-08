@@ -7,10 +7,9 @@
 {% block header %}
 	All the notes I have found in your notebook
 {% endblock %}
-{% block tbody_ %}
+{% block supertable  %}
   {%for res in result %}
-        <tr>
-	<td>
+	<div class="record-note">
 	<b>Note ID:</b> {{res.note_id}}<br>
 		<br>
 		<b>Tags:</b>
@@ -24,8 +23,7 @@
 		<br><br>
 
 	<b>Text:</b> {{res.text}}
-	</td>
-	</tr>
+	</div>
  {%endfor%}   
 {% endblock%}
 
