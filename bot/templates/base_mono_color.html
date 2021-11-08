@@ -5,20 +5,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<style> 
-	table, th, td, tr { 
-    		
-    		border-collapse: collapse;
-		  	 		  }
-	table { width: 50%;
-		margin: auto;
-		}
-
-	
-	th, td {
-  		padding: 5px;
-		}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 <h2 align = "center">{% block header %} {% endblock %}</h2>
 <p align = 'center'><a href= /bot-command>Return to BOT embrace</a></p>

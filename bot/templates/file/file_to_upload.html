@@ -7,14 +7,13 @@
 {% block header %}
 	Please choose the file you would like to upload.
 {% endblock %}
-{% block tbody_ %}
 
+{% block tbody_ %}
 <script type="text/javascript">
     function FormLoad()
     {
         var submitButton = document.getElementById("submit_button");
         submitButton.disabled = true;
-
     }
 
     function OnFileValidation() {
@@ -23,7 +22,6 @@
         var used_file = {{ used_file |safe }}
         var max_size = {{ max_size |safe }}
         var total_file = {{ total_file |safe }}
-
 
         if (typeof (fileUpload.files) != "undefined") {
             var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);

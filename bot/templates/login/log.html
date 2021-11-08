@@ -1,72 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login user</title>
-</head>
+{% extends "base_login_news.html" %}
 
+{% block title %}
+Login user
+{% endblock %}
+
+
+{% block content %}
+<div align='center'><h2>Please input login and password:</h2></div>
 <form method="POST" name="Login">
   <table width = 50% align = 'center'>
     <tbody>
+    {% if get_flashed_messages() %}
       <tr>
-       <td></td> 
+       <td></td>
        <td>
          {% with messages = get_flashed_messages() %}
-         	{% if messages %}
-         		<ul class=flashes>
-    			{% for message in messages %}
-      				<li>{{ message }}</li>
-    			{% endfor %}
-    			</ul>
-  		{% endif %}
-	{% endwith %}	
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+	     {% endwith %}
        </td>		
      </tr>
-     <tr>
-        <td align="left"> 
-          
-        </td>
-        <td align="left"> 
-          <div><h2>Please input login and password:</h2><div>
-        </td>
-       </tr>
+    {% endif %}
       <tr>
-        <td align="left"> 
-          <div>Login</div>
-        </td>
-        <td align="left"> 
-          <div><input type="text" name="Login"  size="50" ></div>
-        </td>
-       </tr>
+        <td>Login</td>
+        <td><input type="text" name="Login"  size="50" ></td>
+      </tr>
      <tr>
-       <td>
-	 <div>Password</div>
-       </td>   			
-       <td align="left"> 
-            <div><input type="password" name="Password"  size="50"></div>
-       </td>
+       <td>Password</td>
+       <td><input type="password" name="Password"  size="50"></td>
      </tr>
      <tr>
-        <td align="left"> 
-          
-        </td>
-        <td align="left"> 
-         <div><input type="submit" value="Login user"><div>
-        </td>
-       </tr>
-      <tr>
-      <tr>
-        <td align="left"> 
-        </td>
-        <td align="left"> 
-         <div><a href="/login/register">Register a new user</a><div>
-        </td>
-       </tr>
-      <tr>	
-   
-	
-    </tbody>
+        <td></td>
+        <td><input type="submit" value="Login user"></td>
+     </tr>
+   </tbody>
   </table> 
-  
+
   </form>
-</html>
+
+<br>
+    <p align="center"><a href="/login/register">Register a new user</a></p>
+<br>
+{% endblock %}
