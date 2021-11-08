@@ -6,7 +6,70 @@ Login user
 
 
 {% block content %}
-<div align='center'><h2>Please input login and password:</h2></div>
+<style>
+p {font-size: 20px; font-family: georgia; }
+html { font-family: georgia; padding: 1rem;
+        background-color: #F0FFF0;
+        -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+         font-family: georgia;}
+body { max-width: 1920px; margin: auto; background: url('/static/background.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+         font-family: georgia;}
+
+    table {
+    width: 50%;
+    border-spacing: 5px;
+    border-collapse: collapse;
+    margin: auto;
+	border: 1px solid black;
+	font-family: georgia, sans-serif;
+	font-size: 18px;
+	border-radius:10px;
+      -moz-border-radius:10px;
+      -webkit-border-radius:10px;
+   }
+
+table, th, td, tr {
+	    padding: 5px;
+        background: #A9E2CC;
+        border: 1px solid black;
+        border-radius:10px;
+      -moz-border-radius:10px;
+      -webkit-border-radius:10px; }
+      input[type=submit], input[type=submit] { align-self: start; min-width: 10em; background-color: #90bede;
+	  border: 2 px solid black;
+	  border-radius:10px;
+      -moz-border-radius:10px;
+      -webkit-border-radius:10px;
+	  color: black;
+	  padding: 8px 32px;
+	  text-decoration: none;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	  font-family: georgia, sans-serif;
+	  font-size: 18px; }
+input[type=text], input[type=email], input[type=password] { align-self: start; min-width: 10em; background-color: #dce6f2;
+	  border: 2 px solid black;
+	  border-radius:10px;
+      -moz-border-radius:10px;
+      -webkit-border-radius:10px;
+	  color: black;
+	  padding: 8px 32px;
+	  text-decoration: none;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	  font-family: georgia, sans-serif;
+	  font-size: 15px; }
+
+</style>
+
+<h2 align="center">Please input login and password:</h2>
 <form method="POST" name="Login">
   <table width = 50% align = 'center'>
     <tbody>
