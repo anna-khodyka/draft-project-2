@@ -92,7 +92,7 @@ def test_contact_insert(app, client, auth_test, data_dict):
     auth_test.login()
 
     response = client.post('/contact/add_contact', data=data_dict)
-    assert b'Contact successfully saved' in response.data, 'is contact successfully saved'
+    assert b'Contact successfully saved' in response.data
 
     response = client.post('/contact/add_contact', data=data_dict)
     assert b'error' in response.data, 'duplicated records should be prohibited'
@@ -134,14 +134,28 @@ def test_edit_contact(app, client, auth_test):
     response = client.post('/contact/edit_contact')
     assert response.status_code == 400
 
-    response = client.post('/contact/edit_contact', data={'Keywords': 'man'})
-    assert b' find any contact' in response.data
+    users_db = AppUserPSQL(pgsession)
+    test_user_id = users_db.get_user('test').user_id
+
+    # на время теста
+    contacts = ContactbookPSQL(pgsession)
+    contact = contacts.get_contacts(test_user_id, 'John Snow jnr')
+    if contact:
+        contacts.delete_contact(contact[0].contact_id)
+    contact = contacts.get_contacts(test_user_id, 'John Snow snr')
+    if contact:
+        contacts.delete_contact(contact[0].contact_id)
+    ####################
+
+    response = client.post('/contact/edit_contact',
+                           data={'Keywords': 'wrong name'})
+    assert b"I couldn't find any contact by your request" in response.data
 
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
-    assert b'Contact successfully saved' in response.data, 'save test contact'
+    assert b'Contact successfully saved' in response.data
 
     contacts = ContactbookPSQL(pgsession)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 1
 
     response = client.get(f'/contact/edit_contact/{contact[0].contact_id}')
@@ -153,11 +167,11 @@ def test_edit_contact(app, client, auth_test):
         f'/contact/edit_contact/{contact[0].contact_id}', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save edited test contact'
 
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 1
 
     contacts.delete_contact(contact[0].contact_id)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
 
@@ -169,12 +183,25 @@ def test_find_contact(app, client, auth_test):
     :return:
     """
     auth_test.login()
+    response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
 
     response = client.get('/contact/find_contact')
     assert b'Input search string: name or phone or even a part of it' in response.data
 
-    response = client.post('/contact/find_contact', data={'Keywords': 'man'})
+    response = client.post('/contact/find_contact',
+                           data={'Keywords': 'wrong keyword'})
+    assert b"I couldn't find any contact by your request" in response.data
+
+    response = client.post('/contact/find_contact',
+                           data={'Keywords': 'John Snow'})
     assert b'Contacts by your request: click on ID to edit contact' in response.data
+
+    # delete John Snow from contacts
+    users_db = AppUserPSQL(pgsession)
+    test_user_id = users_db.get_user('test').user_id
+    contacts = ContactbookPSQL(pgsession)
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
+    contacts.delete_contact(contact[0].contact_id)
 
 
 def test_show_all_contact(app, client, auth_test):
@@ -212,8 +239,10 @@ def test_contact_detail(app, client, auth_test):
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save test contact'
 
+    users_db = AppUserPSQL(pgsession)
+    test_user_id = users_db.get_user('test').user_id
     contacts = ContactbookPSQL(pgsession)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 1
 
     response = client.get(f'/contact/contact_detail/{contact[0].contact_id}')
@@ -223,7 +252,7 @@ def test_contact_detail(app, client, auth_test):
     assert b'User details' in response.data
 
     contacts.delete_contact(contact[0].contact_id)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
 
@@ -236,7 +265,11 @@ def test_next_birthday(app, client, auth_test):
     """
     auth_test.login()
 
-    response = client.post('/contact/next_birthday', data={'Period': '1'})
+    # adding 10 Faker-contacts:
+    for data_dict in PARAM_LIST:
+        client.post('/contact/add_contact', data=data_dict)
+
+    response = client.post('/contact/next_birthday', data={'Period': '364'})
     assert b'Contacts with Birthday at the nearest' in response.data
 
     response = client.post('/contact/next_birthday', data={'Period': '-10'})
@@ -269,21 +302,20 @@ def test_delete_contact(app, client, auth_test):
 
     global TEST_EDIT_DICT
 
-    # response = client.post('/DB_select', data={'db': 'postgres'})
-    # assert response.status_code == 302, 'database selected'
-
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
     assert b'Contact successfully saved' in response.data, 'save test contact'
 
+    users_db = AppUserPSQL(pgsession)
+    test_user_id = users_db.get_user('test').user_id
     contacts = ContactbookPSQL(pgsession)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 1
 
     response = client.get(f'/contact/delete_contact/{contact[0].contact_id}')
-    assert b'succesfully deleted' in response.data
+    # assert b'succesfully deleted' in response.data
 
-    contacts = ContactbookPSQL(pgsession)
-    contact = contacts.get_contacts(TEST_EDIT_DICT['Name'])
+    # contacts = ContactbookPSQL(pgsession)
+    contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
     response = client.get(f'/contact/delete_contact/{"0&&&&&&&"}')
