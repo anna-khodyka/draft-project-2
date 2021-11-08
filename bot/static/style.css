@@ -7,6 +7,17 @@ html { font-family: sans-serif; background: #eee; padding: 1rem; }
       overflow:auto;
       margin-top:20px;
     }
+    #big-table-scroll {
+      height:600px;
+      overflow:auto;
+      margin-top:20px;
+    }
+  .record-note { width:95%;
+				background-color: #bcdbe8;
+                margin: 0 auto;
+                border: 2px solid white;
+                border-radius: 10px 10px 10px 10px;
+                padding: 10px 10px 10px 10px;}
 
 body { max-width: 1920px; margin: auto; background: url('/static/background.jpg');
         -webkit-background-size: cover;
