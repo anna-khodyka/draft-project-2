@@ -8,11 +8,15 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+{% block nav %}
+{% endblock %}
+
 <h2 align = "center">{% block header %} {% endblock %}</h2>
 <p align = 'center'><a href= /bot-command>Return to BOT embrace</a></p>
 <p></p>
 {% block form_line %}
 {% endblock%}
+
 {% block content %}
 {% endblock %}
 <table>

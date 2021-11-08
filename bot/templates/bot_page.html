@@ -8,6 +8,12 @@
 	Please input command for BOT<br>
  {% endblock %}
 
+ {% block nav %}
+<div class="button">
+ <button><a href="{{ url_for('login.logout') }}">LOGOUT</a></button>
+</div>
+ {% endblock %}
+
  {% block tbody_ %}
  <form method = "POST">
 	<tr>			
