@@ -9,22 +9,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 <h2 align = "center">{% block header %} {% endblock %}</h2>
-<p align = 'center'><a href= /bot-command>Return to BOT embrace</a></p>
 <p></p>
 {% block form_line %}
 {% endblock%}
 {% block content %}
 {% endblock %}
-<table>
-	<thead>
-		{% block theader_ %}{% endblock %}
-	</thead>
-	<tbody>
-	<tr align = 'center'>
+
 		{% block tbody_ %}{% endblock %}
-	</tr>
-	</tbody>
-</table>
 
 <p></p>
 <div align = 'center'>
