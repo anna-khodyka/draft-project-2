@@ -106,11 +106,12 @@ class FileFolderPSQL(FileFolder):
 
 
     def get_files(self, user_id, keyword):
+        self.files = []
         result = (
             self.session.query(
                 File.file_id, File.file_type, File.name, File.user_id, File.file_date, File.file_length
-            ).filter(File.user_id == user_id, func.lower(Text.text).like(func.lower(f"%{keyword}%")))
-                     .order_by(File.file_type, File.name).all()
+            ).filter(File.user_id == user_id, File.name.like(func.lower(f"%{keyword}%")))
+            .order_by(File.file_type, File.name).all()
         )
         for res in result:
             self.files.append(FilePSQL(res))
