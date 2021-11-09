@@ -263,7 +263,7 @@ def email_checker(email):
 
 form_dict_temp = {
     "Name": {
-        "value": "Hint: Input first and second name in one row",
+        "value": "",
         "valid": True,
         "checker": name_checker,
         "error_message": "",
@@ -275,43 +275,43 @@ form_dict_temp = {
         "error_message": "",
     },
     "Email": {
-        "value": "Hint: Use user@domain format",
+        "value": "",
         "valid": True,
         "checker": email_checker,
         "error_message": "",
     },
     "Phone": {
-        "value": "Hint: Use + or digits only, phones separate by ','",
+        "value": "",
         "valid": True,
         "checker": phone_checker,
         "error_message": "",
     },
     "ZIP": {
-        "value": "Hint: Up to 10 char",
+        "value": "",
         "valid": True,
         "checker": zip_checker,
         "error_message": "",
     },
     "Country": {
-        "value": "Hint: Up to 50 char",
+        "value": "",
         "valid": True,
         "checker": country_checker,
         "error_message": "",
     },
     "Region": {
-        "value": "Hint: Up to 50 char",
+        "value": "",
         "valid": True,
         "checker": region_checker,
         "error_message": "",
     },
     "City": {
-        "value": "Hint: Up to 40 char",
+        "value": "",
         "valid": True,
         "checker": city_checker,
         "error_message": "",
     },
     "Street": {
-        "value": "Hint: Up to 50 char",
+        "value": "",
         "valid": True,
         "checker": street_checker,
         "error_message": "",
