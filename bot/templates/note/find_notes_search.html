@@ -1,4 +1,4 @@
-{% extends "base_mono_color.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 	Search for note
@@ -7,36 +7,32 @@
 {% block header %}
 	Please input keywords to find note
 {% endblock %}
-{% block tbody_ %}
-    <form method="POST">	
-      	       <tr>	
-               	       <td align="center"> 
-               	           <div>
-							   <label for="Keywords">Input keywords separated with ','</label>
-							   <input type="Keywords"
-									   id="Keywords"
-									   name="Keywords"
-									   size="100">
+{% block supertable %}
+	<div class="record-note;">
+		<form method="POST">
+		<div style="text-align:center;">
+			<label for="Keywords">Input keywords separated with ','</label>
+			<input type="Keywords"
+				   id="Keywords"
+				   name="Keywords"
+				   style="width:80%;
+				   border-radius: 10px 10px 10px 10px;
+				   border: 1px solid #bcdbe8;
+				   align:center;	">
+		</div>
 
-						   </div>
-               	       </td>
-               </tr>
-               <tr>
-               		<td align="center">
-               		<div><input type="submit" value="Seek note"></div>
-			</td>
-	       </tr>	
-    </form>
-		   <tr>
-			   <td align = "center">
-				   <br>
+			<div style="text-align:center;"><input type="submit" value="Seek note" style="width:50%; border: 1px solid white;"></div>
+
+		</form>
+	</div>
 					{% if tags %}
+	<div style="padding: 10px 10px 10px 10px; text-align:center;" >
 						{% for tag_ in tags%}
 				   				<a href="/note/find_notes/{{tag_.tag}}/find">
 							   <mark>{{tag_.tag}}</mark> </a>&nbsp;
 						{% endfor %}
-					{% endif %}
-			   </td>
-		   </tr>
+	</div>
+		{% endif %}
+
 {% endblock%}
 	       

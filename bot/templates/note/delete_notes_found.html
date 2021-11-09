@@ -12,18 +12,17 @@
 	{% endif %}
 {% endblock %}
 
-{% block tbody_ %}
+{% block supertable %}
 {% if result%}
+
 	<form method="POST" action="/note/delete_notes">
-			 <tr>
-				 <td>
-					 <p align="center">Tick the check boxes for notes you would like to delete, and do submit.</p>
+<div class="record-note">
+			 		 <p align="center">Tick the check boxes for notes you would like to delete, and do submit.</p>
 					 <p align="center"> <input type="submit" name="Submit to delete" value="Submit to delete"></p>
-				 </td>
-			 </tr>>
+</div>
 	{%for res in result %}
-              <tr>
-					<td> <input type="checkbox"
+      <div class="record-note">
+             <input type="checkbox"
 								name="Delete"
                                 value={{ res.note_id }}
                                 id = "{{res.note_id }}">
@@ -37,18 +36,17 @@
 							</mark>
 						{% endif %}</p>
 						  <p>{{res.text}}</p>
-					</td>
-              </tr>
+	   </div>
    {%endfor%}
 	</form>
 
    {% else %}
-        <tr>
-		  <td>
-			  <b>I'm really sorry, but this time I couldn't find any notes by your request.
+   <div style="padding: 10px 10px 10px 10px;">
+       <b>I'm really sorry, but this time I couldn't find any notes by your request.
 				  Try to search with another keywords.</b>
-		  </td>
-		</tr>
+
+	</div>
+
 {% endif %}
 {% endblock%}
 

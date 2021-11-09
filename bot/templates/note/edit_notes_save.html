@@ -52,14 +52,23 @@
 
 {% endblock %}
 
-{% block tbody_ %}
-    	<tr>
-            <form method="POST" id="note_form">
-
-               <td  style = "vertical-align : top;">
-                  {% if tags %}
-                  <div> </div>
-                        {% for tag_ in tags %}
+{% block supertable %}
+    <div>
+    <div id = "letf_header"
+         class="left_column" style="height:20px;">
+        <b>Select tags for note</b>
+    </div>
+    <div id = "right_header" style="height:20px;"
+         class="right_column">
+        <b>Input plain text for the note</b>
+    </div>
+</div>
+<div>
+    <form method="POST" id="note_form" onsubmit="clear_storage()">
+    <div class="left_column">
+        <div>
+            {% if tags %}
+                {% for tag_ in tags %}
 
                             <input type="checkbox"
                                    name="Tags"
@@ -68,38 +77,51 @@
                                    {% if tag_ in res.tags %} checked {% endif %} >
                    <label for="{{tag_.tag }}">{{ tag_.tag }}</label><br>
                         {% endfor %}
-                   {% endif%}
-                   <p></p>
-                    <div><input type="submit"
-                                value="Save note"
-                                id="note_submit"
-                                style = "width: 100%; vertical-align: bottom; bottom;"
-                                ></div>
+            {% endif%}
+        </div>
+        <div>
+             <input type="submit"
+                    value="Save note"
+                    id="note_submit"
+                    style = "width: 100%; vertical-align: bottom; bottom; border: 1px solid white;">
+         </div>
+    </div>
 
-               </td>
-               <td style = "vertical-align : top;">
-                   {% if res %}
+    <div class="right_column">
+        {% if res %}
 
-                        <textarea id = "note_text" cols="67" rows = "15" name = "Text">{{res.text}}</textarea>
-                   {% else %}
-                        <textarea cols="67" rows = "15" name = "Text">    </textarea>
-                   {% endif %}
-               </td>
+            <textarea rows = "20" name = "Text" id="note_text"
+                      style=" width:95%;  ">{{res.text}}
+            </textarea>
+        {% else %}
+            <textarea rows = "20" name = "Text" id="note_text"
+                   style=" width:95%;">
+            </textarea>
+        {% endif %}
 
-            </form>
-            </tr>
-            <tr>
-                <td>
-                     <form id="tag_form" method="POST" action="/note/add_tag">
-                            <input type = "text"  name = "new_tag" style = "width: 81%;" >
-                            <input type="submit"
-                                   value="Create new tag"
-                                       style = "width: 100%; ">
-                </form>
-                </td>
-                <td>
-                    Notes are connected to particular user. Max length = 500 char
-                </td>
-        </tr>
+    </div>
+</form>
+</div>
+<div>
+    <hr align="center" width="95%" size="2" style= "color:white;" />
+    <form method="POST" action="/note/add_tag" id="tag_form">
+
+    <div class="left_column" style="height: 40px; text-align: center; background-color: #f0c975;">
+               <input type="submit"
+                value="Create new tag"
+                style = "width: 40%; border: 1px solid white; ">
+
+    </div>
+    <div class="right_column" style="height: 40px; text-align: center; background-color: #f0c975;">
+                <input type = "text"  name = "new_tag" style = "width: 40%;
+                                                                border: 1px solid white;
+                                                                background-color:white;"  >
+    </div>
+    </form>
+</div>
+
+</div>
+<div>
+</div>
 {% endblock%}
 
