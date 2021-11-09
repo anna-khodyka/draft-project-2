@@ -5,17 +5,12 @@
 {% endblock %}
 
 {% block header %}
-	User details
+	Please be kind to get the contact details
 {% endblock %}
 
-{% block theader_ %}
-   <tr>
-   	<th align = "left" width="100">Field</th>
-        <th align = "left" width="500">Value</th>
-   </tr>
-{% endblock %}
-
-{% block tbody_ %}
+{% block supertable %}
+<div style="padding: 5px 5px 5px 5px;">
+<table style="border: 0px solid white; width:90%; padding 5px;">
   <form method = "POST">
     <tr>
        <td>ID</td><td>&nbsp{{contact.contact_id}}</td>
@@ -62,10 +57,12 @@
        <td>Apartment</td><td>&nbsp{{address.apartment}}</td>
     </tr>   
   </form>
-{% endblock%}
-
-{% block links%}
-   <a href= /contact/edit_contact/{{contact.contact_id}}>Edit contact</a></p>
+</table>
+</div>
+<div align="center">
+    <a href= /contact/edit_contact/{{contact.contact_id}}>Edit contact</a></p>
    <a href= /contact/delete_contact/{{contact.contact_id}}>Delete contact</a></p>
    <a href="javascript:window.history.back()">See one more contact</a></p>
-{% endblock %}
+</div>
+{% endblock%}
+

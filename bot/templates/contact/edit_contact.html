@@ -1,4 +1,4 @@
-{% extends "base_mono_color.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 	Edit contact details
@@ -8,119 +8,128 @@
 	Please edit Contact details:
 {% endblock %}
 
-{% block tbody_ %}
+{% block supertable %}
+<div class = "record-note" style="padding: 5px 5px 5px 5px;">
 <form method = "POST">
+<table style="border: 0px solid white; width:90%;">
      <tr>
-        <td align="left"> 
+        <td align="left">
            <div>Name</div>
         </td>
-        <td align="left"> 
-           <div><input type="text" name="Name"  size="100" value = '{{form_dict['Name']['value']}}'></div>
+        <td align="left">
+           <div><input type="text" name="Name"  value = "{{form_dict['Name']['value']}}"
+                       style="width: 90%; border: 1px solid white;"></div>
            <div style="color:red;">{{form_dict['Name']['error_message']}}</div>
         </td>
      </tr>
      <tr>
-        <td align="left"> 
+        <td align="left">
             <div>Phone list </div>
-        </td> 
-        <td align="left"> 
-            <div><input type="text" name="Phone"  size="100" value = '{{form_dict['Phone']['value']}}'></div>
-            <div style="color:red;">{{form_dict['Phone']['error_message']}}
-
-            </div>
+        </td>
+        <td align="left">
+            <div><input type="text" name="Phone"  value = "{{form_dict['Phone']['value']}}"
+                        style="width: 90%; border: 1px solid white;"></div>
+            <div style="color:red;">{{form_dict['Phone']['error_message']}}</div>
         </td>
      </tr>
      <tr>
-        <td align="left"> 
+        <td align="left">
             <div>Email</div>
-        </td> 
-        <td align="left"> 
-            <div><input type="text" name="Email"  size="50" value = '{{form_dict['Email']['value']}}'></div>
+        </td>
+        <td align="left">
+            <div><input type="email" name="Email"  value = "{{form_dict['Email']['value']}}"
+                        style="width: 90%; border: 1px solid white;"></div>
             <div style="color:red;">{{form_dict['Email']['error_message']}}</div>
         </td>
       </tr>
       <tr>
         <td align="left">
             <div>Birthday</div>
-        </td> 
-        <td align="left"> 
-            <div><input type="date" name="Birthday"  size="20"
-                          {% if form_dict['Birthday']['value'] %}
-                                value = {{form_dict['Birthday']['value'].strftime('%Y-%m-%d')}}></div>
-                          {% endif %}</div>
+        </td>
+        <td align="left">
+            <div><input type="date" name="Birthday"  size="20" style="border: 1px solid white;"
+            {% if form_dict['Birthday']['value'] %}
+                value = {{form_dict['Birthday']['value'].strftime('%Y-%m-%d')}} ></div>
+            {% endif %}
             <div style="color:red;">{{form_dict['Birthday']['error_message']}}</div>
          </td>
       </tr>
       <tr>
-         <td align="left"> 
+         <td align="left">
             <div>ZIP</div>
          </td>
-         <td align="left"> 
-            <div><input type="text" name="ZIP"  size="10" value = '{{form_dict['ZIP']['value']}}'></div>
+         <td align="left">
+            <div><input type="text" name="ZIP"  size="10" value = "{{form_dict['ZIP']['value']}}"
+                        style="border: 1px solid white;"></div>
             <div style="color:red;">{{form_dict['ZIP']['error_message']}}</div>
           </td>
       </tr>
       <tr>
-          <td align="left"> 
+          <td align="left">
              <div>Country</div>
           </td>
-          <td align="left"> 
-             <div><input type="text" name="Country"  size="50" value = '{{form_dict['Country']['value']}}'></div>
-             <div style="color:red;">{{form_dict['Country']['error_message']}}</p>
+          <td align="left">
+             <div><input type="text" name="Country"  value = "{{form_dict['Country']['value']}}"
+                         style="width: 90%; border: 1px solid white;"></div>
+              <div style="color:red;">{{form_dict['Country']['error_message']}}</p></div>
            </td>
        </tr>
        <tr>
-           <td align="left"> 
+           <td align="left">
              <div>Region</div>
            </td>
-           <td align="left"> 
-             <div><input type="text" name="Region"  size="50" value = '{{form_dict['Region']['value']}}'></div>
+           <td align="left">
+             <div><input type="text" name="Region" value = "{{form_dict['Region']['value']}}"
+                         style="width: 50%; border: 1px solid white;"></div>
              <div style="color:red;">{{form_dict['Region']['error_message']}}</div>
            </td>
          </tr>
          <tr>
-           <td align="left"> 
+           <td align="left">
              <div>City</div>
            </td>
-           <td align="left"> 
-             <div><input type="text" name="City"  size="50" value = '{{form_dict['City']['value']}}'></div>
+           <td align="left">
+             <div><input type="text" name="City"  value = "{{form_dict['City']['value']}}"
+                         style="width: 50%; border: 1px solid white;"></div>
              <div style="color:red;">{{form_dict['City']['error_message']}}</div>
            </td>
          </tr>
          <tr>
-           <td align="left"> 
+           <td align="left">
              <div>Street</div>
            </td>
-           <td align="left"> 
-             <div><input type="text" name="Street"  size="100" value = '{{form_dict['Street']['value']}}'></div>
+           <td align="left">
+             <div><input type="text" name="Street"  value = "{{form_dict['Street']['value']}}"
+                         style="width: 90%; border: 1px solid white;"></div>
              <div style="color:red;">{{form_dict['Street']['error_message']}}</div>
            </td>
          </tr>
          <tr>
-           <td align="left"> 
+           <td align="left">
              <div>House</div>
            </td>
-           <td align="left"> 
-             <div><input type="text" name="House"  size="10" value = '{{form_dict['House']['value']}}' ></div>
+           <td align="left">
+             <div><input type="text" name="House"  size="10" value = "{{form_dict['House']['value']}}"
+                         style="border: 1px solid white;"></div>
              <div style="color:red;">{{form_dict['House']['error_message']}}</div>
            </td>
          </tr>
          <tr>
-           <td align="left"> 
+           <td align="left">
               <div>Apartment</div>
            </td>
-           <td align="left" valign = "top"> 
-              <div><input type="text" name="Apartment"  size="10" value = '{{form_dict['Apartment']['value']}}'></div>
+           <td align="left" valign = "top">
+              <div><input type="text" name="Apartment"  size="10" value = "{{form_dict['Apartment']['value']}}"
+                          style="border: 1px solid white;"></div>
               <div style="color:red;">{{form_dict['Apartment']['error_message']}}</div>
             </td>
          </tr>
-         <tr>
-	   <td></td>
-           <td>
-              <div align = 'center'><input type="submit" value="Save contact"><div>
-           </td>
-	 </tr>  		
+
+</table>
+   <div style="text-align:center;"><input type="submit" value="Save contact" style="border: 1px solid white;">
+   </div>
   </form>
+</div>
 {% endblock%}
 
 

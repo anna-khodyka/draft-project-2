@@ -5,21 +5,19 @@
 {% endblock %}
 
 {% block header %}
-	All the contacts from your address book. Click ID to see details
+	All the contacts from your address book. <br> Click ID to see details
 {% endblock %}
-{% block theader_%}
-   <tr>
-      <th width = 20%>ID</th>
-      <th width = 80%>Name</th>
-   </tr>
-{% endblock%}
-
-{% block tbody_ %}
+{% block supertable %}
   {%for res in result %}
-        <tr>
-	   <td><a href =contact_detail/{{res.contact_id}}>{{res.contact_id}}</a></td>
-           <td>{{res.name}}</td>
-        </tr>
+     <div class="record-note" style="width: 18%; float: left; text-align: left;" >
+                <a href =/contact/contact_detail/{{res.contact_id}}>ID {{res.contact_id}}</a>
+        </div>
+        <div class="record-note" style="width: 70%; float: right; text-align: center;">
+                {{res.name}}
+        </div>
+        <div>
+            <hr align="center" width="95%" size="0" style= "color:white;" />
+        </div>
   {%endfor%}
 {% endblock%}
 
