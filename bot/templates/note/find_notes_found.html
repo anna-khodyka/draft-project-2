@@ -15,7 +15,7 @@
 {% if result %}
 	{%for res in result %}
 <div class="record-note">
-		    <b>Note ID:</b>  {{res.note_id}}</>
+		    <b>Note ID:</b>  {{res.note_id}}
        		    <p><b>Tags:</b> {% if res.tags%}
 		<mark>
 			{% for tag in res.tags %}
@@ -28,14 +28,23 @@
 					<tr style =" border: none; background-color: transparent;">
 						<td align="right" style =" border: none; background-color: transparent;">
 		        			<form action="/note/save_note/{{res.note_id}}" style =" border: none; background-color: transparent;">
-								<button name="edit" width=200>Edit note &nbsp &nbsp</button>
+								<button name="edit"
+										width=200
+										style="border-radius: 10px 10px 10px 10px;
+											   border: 1px solid white;
+											   color: #065492; align:center; width: 100px	">Edit note</button>
 								&nbsp;
 							</form>
 						</td>
 						<td align="left" style =" border: none; background-color: transparent;">
 							<form action="/note/delete_note/{{res.note_id}}" style =" border: none; background-color: transparent;">
 								&nbsp;
-								<button name="delete" width = 200>Delete note</button>
+								<button name="delete"
+										width = 200
+										style="border-radius: 10px 10px 10px 10px;
+											   border: 1px solid white;
+											   color: #db5026;
+											   text-align:center; width: 100px	">Delete note</button>
 							</form>
 						</td>
 					</tr>
@@ -43,11 +52,9 @@
 </div>
 {% endfor %}
 {% else %}
-        <tr>
-		  <td>
+	<div style="padding: 10px 10px 10px 10px;">
 			  <b>I'm really sorry, but this time I couldn't find any notes by your request.
 				  Try to search with another keywords.</b>
-		  </td>
-		</tr>
+	</div>
 {% endif %}
 {% endblock%}
