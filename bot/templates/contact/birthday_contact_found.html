@@ -6,7 +6,7 @@
 
 {% block header %}
 {% if result %}
-	Contacts with Birthday at the nearest {{days}} days.
+	Contacts with Birthday at the nearest {{days}} days.<br>
         Click on ID to see contact details
 {% else%}
 	There is a kind of problem
@@ -21,24 +21,41 @@
     </tr>
 {% endblock %}
 
-{% block tbody_ %}
+{% block supertable %}
 {% if result %}
+		<div class="record-note" style="width: 18%; float: left; text-align: left;" >
+               ID
+        </div>
+        <div class="record-note" style="width: 50%; float: left; text-align: center;">
+               Name
+        </div>
+		<div class="record-note" style="width: 20%; float: left; text-align: center;">
+               Birthday
+        </div>
+        <div>
+            <hr align="center" width="95%" size="0" style= "color:white;" />
+        </div>
 	<form method = "POST">
 		{%for res in result %}
-				<tr>
-			<td><a href =/contact/contact_detail/{{res.contact_id}}>{{res.contact_id}}</a></td>
-				<td>{{res.name}}</td>
-			<td>{{res.celebrate}}</td>
-			</tr>
+		<div class="record-note" style="width: 18%; float: left; text-align: left;" >
+                <a href =/contact/contact_detail/{{res.contact_id}}>ID {{res.contact_id}}</a>
+        </div>
+        <div class="record-note" style="width: 50%; float: left; text-align: center;">
+                {{res.name}}
+        </div>
+		<div class="record-note" style="width: 20%; float: left; text-align: center;">
+               {{res.celebrate}}
+        </div>
+        <div>
+            <hr align="center" width="95%" size="0" style= "color:white;" />
+        </div>
 		{%endfor%}
 	  </form>
 {% else%}
-	<tr>
-		  <td>
-			  <b>I'm really sorry, but this time I couldn't find any contacts by your request.
-				  Try to search with another period.</b>
-		  </td>
-	</tr>
+	<div class ="record-note">
+     		  <b>I'm really sorry, but this time I couldn't find any contact by your request.
+				  Try to search with another keywords.</b>
+	</div>
 {% endif %}
 {% endblock%}
 

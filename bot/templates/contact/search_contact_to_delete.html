@@ -1,21 +1,30 @@
-{% extends "base_mono_color.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 	Select a contact to delete
 {% endblock %}
 
 {% block header %}
-	Please input search string: some parts of the names or phones
+	Let me search strings: parts of the names or numbers
 {% endblock %}
 
-{% block tbody_ %}
-   <form method = "POST">
-     <tr>
-       <td align="left"> 
-         <input type="text" name="Keywords"  size="100" >
-         <p></p> 
-         <div align = 'center'><input type="submit" value="Select contact to delete"><div>
-       </td> 
-     </tr>  
-   </form> 
+{% block supertable %}
+    <div class="record-note;">
+		<form method="POST">
+		<div style="text-align:center;">
+			<label for="Keywords">Input keywords separated with ','</label>
+			<input type="Keywords"
+				   id="Keywords"
+				   name="Keywords"
+				   style="width:80%;
+				   border-radius: 10px 10px 10px 10px;
+				   border: 1px solid #bcdbe8;
+				   align:center;	">
+		</div>
+
+			<div style="text-align:center;"><input type="submit" value="Select contact to delete" style="width:50%; border: 1px solid white;"></div>
+
+		</form>
+	</div>
+
 {% endblock%}           

@@ -12,34 +12,28 @@
 	{% endif %}
 
 {% endblock %}
-
-{% block theader_ %}
-    <tr>
-      <th width = 20%>ID</th>
-      <th width = 80%>Name</th>
-    </tr>
-{% endblock %}
-
-{% block tbody_ %}
+{% block supertable %}
 {% if result %}
-    <form method = "POST">
+<form method = "POST">
       {%for res in result %}
-         <tr>
-        <td><a href =/contact/contact_detail/{{res.contact_id}}>{{res.contact_id}}</a></td>
-            <td>{{res.name}}</td>
-         </tr>
+        <div class="record-note" style="width: 18%; float: left; text-align: left;" >
+                <a href =/contact/contact_detail/{{res.contact_id}}>ID {{res.contact_id}}</a>
+        </div>
+        <div class="record-note" style="width: 70%; float: right; text-align: center;">
+                {{res.name}}
+        </div>
+        <div>
+            <hr align="center" width="95%" size="0" style= "color:white;" />
+        </div>
+
       {%endfor%}
       </form>
-{% else%}
-     <tr>
-		 <td>
-         </td>
-		  <td>
-			  <b>I'm really sorry, but this time I couldn't find any contact by your request.
-				  Try to search with another keywords.</b>
-		  </td>
 
-		</tr>
+{% else%}
+<div class ="record-note">
+     		  <b>I'm really sorry, but this time I couldn't find any contact by your request.
+				  Try to search with another keywords.</b>
+</div>
 {% endif %}
 {% endblock%}
 
