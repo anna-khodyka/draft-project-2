@@ -43,57 +43,69 @@
 {% block header %}
 	Please select tags and create the body for a new note
 {% endblock %}
-{% block theader_ %}
-    <tr>
-      <th width = 40%>Select tags you would like connect with note</th>
-      <th width = 60%>Input plain text for the note</th>
-    </tr>
-{% endblock %}
 
-{% block tbody_ %}
-    	<tr>
-            <form method="POST" id="note_form" onsubmit="clear_storage()">
+{% block supertable %}
+<div>
+    <div id = "letf_header"
+         class="left_column" style="height:20px;">
+        <b>Select tags for note</b>
+    </div>
+    <div id = "right_header" style="height:20px;"
+         class="right_column">
+        <b>Input plain text for the note</b>
+    </div>
+</div>
+<div>
+    <form method="POST" id="note_form" onsubmit="clear_storage()">
+    <div class="left_column">
+        <div>
+            {% if tags %}
+                {% for tag_ in tags %}
+                    <input type="checkbox"
+                           name="Tags"
+                           value={{ tag_.tag_id }}
+                           id = "{{tag_.tag }}">
+                    <label for="{{tag_.tag }}">{{ tag_.tag }}</label><br>
+                {% endfor %}
+            {% endif%}
+        </div>
+        <div>
+             <input type="submit"
+                    value="Save note"
+                    id="note_submit"
+                    style = "width: 100%; vertical-align: bottom; bottom; border: 1px solid white;">
+         </div>
+    </div>
 
-               <td  style = "vertical-align : top;">
-                  {% if tags %}
-                  <div> </div>
-                        {% for tag_ in tags %}
+    <div class="right_column">
+        <textarea cols="50" rows = "25" name = "Text" id="note_text"
+                  style="border-radius: 10px 10px 10px 10px;
+                  border: 1px solid white;  ">
+        </textarea>
+    </div>
+</form>
+</div>
+<div>
+    <hr align="center" width="95%" size="2" style= "color:white;" />
+    <form method="POST" action="/note/add_tag" id="tag_form">
 
-                            <input type="checkbox"
-                                   name="Tags"
-                                   value={{ tag_.tag_id }}
-                                   id = "{{tag_.tag }}"
-                            >
-                   <label for="{{tag_.tag }}">{{ tag_.tag }}</label><br>
-                        {% endfor %}
-                   {% endif%}
-                   <p></p>
-                    <div><input type="submit"
-                                value="Save note"
-                                id="note_submit"
-                                style = "width: 100%; vertical-align: bottom; bottom;"></div>
+    <div class="left_column" style="height: 40px; text-align: center; background-color: #f0c975;">
+               <input type="submit"
+                value="Create new tag"
+                style = "width: 40%; border: 1px solid white; ">
 
-               </td>
-               <td style = "vertical-align : top;">
-                <textarea cols="67" rows = "15" name = "Text" id="note_text">    </textarea>
+    </div>
+    <div class="right_column" style="height: 40px; text-align: center; background-color: #f0c975;">
+                <input type = "text"  name = "new_tag" style = "width: 40%;
+                                                                border: 1px solid white;
+                                                                background-color:white;"  >
+    </div>
+    </form>
+</div>
 
-               </td>
-
-            </form>
-            </tr>
-            <tr>
-                <td>
-                     <form method="POST" action="/note/add_tag" id="tag_form">
-                            <input type = "text"  name = "new_tag" style = "width: 81%;" >
-                            <input type="submit"
-                                   value="Create new tag"
-                                       style = "width: 100%; ">
-                </form>
-                </td>
-                <td>
-                    Notes are connected to particular user. Max length = 500 char
-                </td>
-        </tr>
+</div>
+<div>
+</div>
 
 {% endblock%}
 
