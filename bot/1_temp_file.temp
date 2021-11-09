@@ -1,147 +1,32 @@
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000018AA5B1F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000018AA5B1F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000018AA5B1F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000018AA5B1F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x00000141C7F3AF70>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x00000141C7F3AF70>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x00000243F4688670>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x000001D6C9DBC4C0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019B92A065E0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: None
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019B92A065E0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: <bot.users_data_classes.UserPSQL object at 0x0000019B93CB9310>
-Impossible to invalidate cache for function('get_user',)
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019B92A065E0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: <bot.users_data_classes.UserPSQL object at 0x0000019B93CA6E20>
-Impossible to invalidate cache for function('get_user',)
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to invalidate cache for function('get_user',)
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019B92A065E0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: None
-Impossible to invalidate cache for function('get_user',)
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019B92A065E0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: <bot.users_data_classes.UserPSQL object at 0x0000019B987B9820>
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Hello!', 'to_call': 'hello'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Hello!', 'to_call': 'hello'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Ready to print out all the contacts', 'to_call': 'show all contacts'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Ready to print out all the contacts', 'to_call': 'show all contacts'}
-Impossible to cache value for function<function ContactbookPSQL.get_all_contacts at 0x0000019BC9008940>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: []
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Create new contact for you', 'to_call': 'add contact'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Create new contact for you', 'to_call': 'add contact'}
-Impossible to invalidate cache for function('get_contacts', 'get_all_contacts', 'get_contact_details', 'get_birthday')
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Print out all the notes', 'to_call': 'show all notes'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Print out all the notes', 'to_call': 'show all notes'}
-Impossible to cache value for function<function NotebookPSQL.get_all_notes at 0x0000019B92A0ECA0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: []
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Ready to print out all the contacts', 'to_call': 'show all contacts'}
-Impossible to cache value for function<function ContactbookPSQL.get_all_contacts at 0x0000019BC9008940>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: [<bot.contacts_data_classes.ContactPSQL object at 0x0000019B9AE396D0>]
-Impossible to cache value for function<function ContactbookPSQL.get_contact_details at 0x0000019BC9008B80>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: <bot.contacts_data_classes.ContactDetails object at 0x0000019B99C9E040>
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
-Impossible to cache value for function<function listener at 0x0000019B92A10A60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Get the info about nearest new-borners', 'to_call': 'next birthday'}
-Impossible to cache value for function<function ContactbookPSQL.get_birthday at 0x0000019BC9008CA0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: [<bot.contacts_data_classes.ContactPSQL object at 0x0000019B9AE396D0>, <bot.contacts_data_classes.ContactPSQL object at 0x0000019B9E550880>]
-Impossible to cache value for function<function ContactbookPSQL.get_birthday at 0x0000019BC9008CA0>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: [<bot.contacts_data_classes.ContactPSQL object at 0x0000019B9AE396D0>, <bot.contacts_data_classes.ContactPSQL object at 0x0000019B9E550880>, <bot.contacts_data_classes.ContactPSQL object at 0x0000019B9E4D1C70>, <bot.contacts_data_classes.ContactPSQL object at 0x0000019B9E4DB520>]
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000020F9A41F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: None
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000020F9A41F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: None
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000020F9A41F700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: None
-Impossible to invalidate cache for function('get_user',)
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to flush cache
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019446794700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: None
-Impossible to invalidate cache for function('get_user',)
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Impossible to cache value for function<function AppUserPSQL.get_user at 0x0000019446794700>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: <bot.users_data_classes.UserPSQL object at 0x000001944C587CA0>
-Impossible to cache value for function<function listener at 0x00000194467ABA60>
-There is a problem with LRU cache system: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
-Function value: {'description': 'Here the list of available commands/features', 'to_call': 'help'}
+version: '2'
+services:
+#    mongodb:
+#        image: mongo:latest
+#        container_name: "mongodb"
+#        environment:
+#          - MONGO_DATA_DIR=/data/db
+#          - MONGO_LOG_DIR=/dev/null
+#          - MONGO_INITDB_ROOT_USERNAME:mongo
+#          - MONGO_INITDB_ROOT_PASSWORD:mongo
+#          - MONGO_INITDB_DATABASE:contact_book
+#        volumes:
+#          - ./data:/data/db
+#        ports:
+#            - 27017:27017
+
+    db:
+      container_name: project_1
+      image: postgres:13.4
+      restart: always
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: 1234
+        POSTGRES_DB: contact_book
+      ports:
+        - "5432:5432"
+      volumes:
+        - ./contact_book.sql:/docker-entrypoint-initdb.d/contact_book.sql
+        - project_1_data:/var/lib/postgresql/data/
+volumes:
+  project_1_data:
+        

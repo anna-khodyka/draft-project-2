@@ -9,121 +9,112 @@
 {% endblock %}
 
 {% block supertable %}
-<div class="record-note" style="padding: 5px 5px 5px 5px;">
-<div style= "width: 40%; float: center;">
-    <div style= "width: 66%;
+<style>
+    .left-column {
+        width: 30%;
          text-align: left;
          background-color: #f0c975;
          float: left;
          border: 1px solid white;
          border-radius: 0px 15px 15px 15px;
          padding: 5px 5px 5px 15px;
-                    " >ID</div>
-    <div style= "width: 100%;">&nbsp;</div>
-    <div style= "width: 100%; height: 15px;"></div>
-    <div style="float:right; width: 80%">
-        <div style= "width: 78%;
+         font-family: georgia ;
+            font-size: 20px;
+    }
+    .right-column {
+        width: 80%;
             text-align: left;
             background-color:  #bcdbe8;
             float: left;
             border: 1px solid white;
             border-radius: 15px 0px 15px 15px;
             padding: 5px 5px 5px 15px;
-            "
-                        >&nbsp{{contact.contact_id}}
-        </div>
-        <div style="width: 12%; float: right;
-            text-align: left;">
+            font-family: georgia ;
+            font-size: 20px;
+    }
+</style>
 
-            <img src="{{ url_for('static', filename='ginger bird.png') }}"
-                 style="width: 25px; height: 25px;">
-        </div>
-    </div>
-</div>
-</div>
 <div class="record-note" style="padding: 5px 5px 5px 5px;">
-<table style="border: 0px solid white; width:90%; padding 5px; font-size: 20px;">
-
-  <form method = "POST">
+<div align = 'center'>
+<div id="table-wrapper">
+<table style= "width: 90%; float: center; border: none;" >
     <tr>
-       <td style= "width: 66%;
-                 text-align: left;
-                 background-color: #f0c975;
-                 float: left;
-                 border: 1px solid white;
-                 border-radius: 0px 15px 15px 15px;
-                 padding: 5px 5px 5px 15px;
-                            " >ID</td>
-        <div style="float:right; width: 80%">
-        <td style= "width: 78%;
-                    text-align: left;
-                    background-color:  #bcdbe8;
-                    float: right;
-                    border: 1px solid white;
-                    border-radius: 15px 0px 15px 15px;
-                    padding: 5px 5px 5px 15px;
-                    ">&nbsp{{contact.contact_id}}</td>
-            <div style="width: 12%; float: right;
-                    text-align: left;">
-            <img src="{{ url_for('static', filename='ginger bird.png') }}"
-                 style="width: 25px; height: 25px;">
-        </div>
-        </div>
-
+    <td class="left-column">ID</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{contact.contact_id}}</div>
+    </td></tr>
+    <tr>
+    <td class="left-column">Name</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{contact.name}}</div>
+    </td>
+    <td class="left-column">Birthday</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{contact.birthday}}</div>
+    </td></tr>
+    <tr>
+    <td class="left-column">Email</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{email}}</div>
+    </td></tr>
+    <tr>
+    <td class="left-column">Phones</td>
+    {% for item in phone %}
+        <td style="float:right; width: 65%">
+            <div class="right-column">&nbsp{{item}}</div>
+        </td>
+    {% endfor %}
     </tr>
-  </form>
+    <tr>
+    <td class="left-column">Address</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">...</div>
+    </td>
+    </tr>
+    <tr>
+    <td class="left-column">ZIP</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.zip}}</div>
+    </td></tr>
+    <tr>
+    <td class="left-column">Country</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.country}}</div>
+    </td></tr>
+        <tr>
+    <td class="left-column">Region</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.region}}</div>
+    </td></tr>
+        <tr>
+    <td class="left-column">City</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.city}}</div>
+    </td></tr>
+        <tr>
+    <td class="left-column">Street</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.street}}</div>
+    </td></tr>
+        <tr>
+    <td class="left-column">House</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.house}}</div>
+    </td></tr>
+        <tr>
+    <td class="left-column">Apartment</td>
+    <td style="float:right; width: 65%">
+        <div class="right-column">&nbsp{{address.apartment}}</div>
+    </td></tr>
+
 </table>
 
-    <table style="border: 0px solid white; width:90%; padding 5px; font-size: 20px;">
-  <form method = "POST">
-    <tr>
-       <td>Name</td><td>&nbsp{{contact.name}}</td>
-    </tr>
-    <tr>
-       <td>Birthday</td><td>&nbsp{{contact.birthday}}</td>
-    </tr>
-    <tr>
-       <td>Email</td><td>&nbsp{{email}}</td>
-    </tr>
-    <tr>
-       <td><b>Phones</b></td><td></td>
-    </tr>
-       {% for item in phone %}
-         <tr>
-            <td></td><td>&nbsp{{item}}</td>
-         </tr>
-       {% endfor %}
-    <tr>
-       <td><b>Address</b></td><td></td>
-    </tr>
-    <tr>
-       <td>ZIP</td><td>&nbsp{{address.zip}}</td>
-    </tr>
-    <tr>
-       <td>Country</td><td>&nbsp{{address.country}}</td>
-    </tr>
-    <tr>
-       <td>Region</td><td>&nbsp{{address.region}}</td>
-    </tr>
-    <tr>
-       <td>City</td><td>&nbsp{{address.city}}</td>
-    </tr>
-    <tr>
-       <td>Street</td><td>&nbsp{{address.street}}</td>
-    </tr>
-    <tr>
-       <td>House</td><td>&nbsp{{address.house}}</td>
-    </tr>
-    <tr>
-       <td>Apartment</td><td>&nbsp{{address.apartment}}</td>
-    </tr>   
-  </form>
-</table>
-</div>
+
 <div align="center">
-    <a href= /contact/edit_contact/{{contact.contact_id}}>Edit contact</a></p>
-   <a href= /contact/delete_contact/{{contact.contact_id}}>Delete contact</a></p>
-   <a href="javascript:window.history.back()">See one more contact</a></p>
+    <p><a href= /contact/edit_contact/{{contact.contact_id}}>Edit contact</a></p>
+   <p><a href= /contact/delete_contact/{{contact.contact_id}}>Delete contact</a></p>
+   <p><a href="javascript:window.history.back()">See one more contact</a></p>
 </div>
+</div></div></div>
 {% endblock%}
 
