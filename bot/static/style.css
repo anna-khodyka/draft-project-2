@@ -19,6 +19,24 @@ html { font-family: sans-serif; background: #eee; padding: 1rem; }
                 border-radius: 10px 10px 10px 10px;
                 padding: 10px 10px 10px 10px;}
 
+  .right_column{
+            width:58%;
+            float:right;
+            background-color: #bcdbe8;
+            border: 2px solid white;
+            border-radius: 10px 10px 10px 10px;
+            padding: 10px 10px 10px 10px;
+            text-align:center;}
+
+  .left_column{
+                width:35%;
+                float:left;
+                background-color: #bcdbe8;
+                border: 2px solid white;
+                border-radius: 10px 10px 10px 10px;
+                padding: 10px 10px 10px 10px;
+  }
+
 body { max-width: 1920px; margin: auto; background: url('/static/background.jpg');
         -webkit-background-size: cover;
          -moz-background-size: cover;
