@@ -17,8 +17,9 @@ html { font-family: sans-serif; background: #eee; padding: 1rem; }
                 margin: 0 auto;
                 border: 2px solid white;
                 border-radius: 10px 10px 10px 10px;
-                padding: 10px 10px 10px 10px;}
-
+                padding: 10px 10px 10px 10px;
+                font-family: georgia;
+                font-size: 20px;}
 
   .right_column{
             width:58%;
@@ -77,7 +78,7 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .content textarea { min-height: 12em; resize: vertical; }
 input.danger { color: #cc2f2e; }
 input[type=submit], input[type=submit] { align-self: start; min-width: 10em; background-color: #90bede;
-	  border: 2 px solid black;
+	  border: 2 px solid white;
 	  border-radius:10px;
       -moz-border-radius:10px;
       -webkit-border-radius:10px;
@@ -92,7 +93,7 @@ input[type=text], input[type=email], input[type=date], input[type=password]
       { align-self: start;
       min-width: 10em;
       background-color: #dce6f2;
-	  border: 2 px solid black;
+	  border: 1 px solid white;
 	  border-radius:10px;
       -moz-border-radius:10px;
       -webkit-border-radius:10px;
