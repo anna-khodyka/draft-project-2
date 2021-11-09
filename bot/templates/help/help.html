@@ -6,26 +6,53 @@
 </head>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <h2 align = 'center'>The list of all awailable features listed below:</h2>
-    <table width = '50%' align = center>
-    <tbody>
-    <thead>
-	<th>Command</th>
-        <th>Description</th> 
-    </thead>
+
+<div align = 'center'>
+<div id="table-wrapper">
+  <div id="big-table-scroll">
     {% for command in exec_command.values() %}
         {% set command_list = command[1].split(":")%}
-        <tr>
-        <td>
-        <b>{{command_list[0]}}</b>
-        </td>
-        <td>
-           {{command_list[1]}}
-        </td>   
-        </td>
-        </tr>
-     {% endfor %}   
-     </tbody>
-     </table>
-     <p> </p>
-     <p align = 'center'><a href="/bot-command">Return to BOT embrace</a></p>
+        <div style= "width: 40%; float: center;">
+            <div style= "width: 66%;
+                 text-align: left;
+                 background-color: #f0c975;
+                 float: left;
+                 border: 1px solid white;
+                 border-radius: 0px 15px 15px 15px;
+                 padding: 5px 5px 5px 15px;
+                            " >{{command_list[0]}}</div>
+            <div style= "width: 100%;">&nbsp;</div>
+            <div style= "width: 100%; height: 15px;"></div>
+            <div style="float:right; width: 80%">
+                <div style= "width: 78%;
+                    text-align: left;
+                    background-color:  #bcdbe8;
+                    float: left;
+                    border: 1px solid white;
+                    border-radius: 15px 0px 15px 15px;
+                    padding: 5px 5px 5px 15px;
+                    "
+                                >{{command_list[1]}}
+                </div>
+                <div style="width: 12%; float: right;
+                    text-align: left;">
+
+                    <img src="{{ url_for('static', filename='ginger bird.png') }}"
+                         style="width: 25px; height: 25px;">
+                </div>
+            </div>
+
+            <div style= "width: 100%; height: 15px;"> </div>
+            <br>
+        </div>
+
+   {% endfor%}
+  </div>
+ </div>
+</div>
+
+<p align = 'center'><a href="/bot-command">Return to BOT embrace</a></p>
+
+</html>
+
         

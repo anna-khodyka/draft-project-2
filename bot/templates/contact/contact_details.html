@@ -9,12 +9,73 @@
 {% endblock %}
 
 {% block supertable %}
-<div style="padding: 5px 5px 5px 5px;">
-<table style="border: 0px solid white; width:90%; padding 5px;">
+<div class="record-note" style="padding: 5px 5px 5px 5px;">
+<div style= "width: 40%; float: center;">
+    <div style= "width: 66%;
+         text-align: left;
+         background-color: #f0c975;
+         float: left;
+         border: 1px solid white;
+         border-radius: 0px 15px 15px 15px;
+         padding: 5px 5px 5px 15px;
+                    " >ID</div>
+    <div style= "width: 100%;">&nbsp;</div>
+    <div style= "width: 100%; height: 15px;"></div>
+    <div style="float:right; width: 80%">
+        <div style= "width: 78%;
+            text-align: left;
+            background-color:  #bcdbe8;
+            float: left;
+            border: 1px solid white;
+            border-radius: 15px 0px 15px 15px;
+            padding: 5px 5px 5px 15px;
+            "
+                        >&nbsp{{contact.contact_id}}
+        </div>
+        <div style="width: 12%; float: right;
+            text-align: left;">
+
+            <img src="{{ url_for('static', filename='ginger bird.png') }}"
+                 style="width: 25px; height: 25px;">
+        </div>
+    </div>
+</div>
+</div>
+<div class="record-note" style="padding: 5px 5px 5px 5px;">
+<table style="border: 0px solid white; width:90%; padding 5px; font-size: 20px;">
+
   <form method = "POST">
     <tr>
-       <td>ID</td><td>&nbsp{{contact.contact_id}}</td>
+       <td style= "width: 66%;
+                 text-align: left;
+                 background-color: #f0c975;
+                 float: left;
+                 border: 1px solid white;
+                 border-radius: 0px 15px 15px 15px;
+                 padding: 5px 5px 5px 15px;
+                            " >ID</td>
+        <div style="float:right; width: 80%">
+        <td style= "width: 78%;
+                    text-align: left;
+                    background-color:  #bcdbe8;
+                    float: right;
+                    border: 1px solid white;
+                    border-radius: 15px 0px 15px 15px;
+                    padding: 5px 5px 5px 15px;
+                    ">&nbsp{{contact.contact_id}}</td>
+            <div style="width: 12%; float: right;
+                    text-align: left;">
+            <img src="{{ url_for('static', filename='ginger bird.png') }}"
+                 style="width: 25px; height: 25px;">
+        </div>
+        </div>
+
     </tr>
+  </form>
+</table>
+
+    <table style="border: 0px solid white; width:90%; padding 5px; font-size: 20px;">
+  <form method = "POST">
     <tr>
        <td>Name</td><td>&nbsp{{contact.name}}</td>
     </tr>
