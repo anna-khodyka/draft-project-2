@@ -8,7 +8,7 @@
 	Please choose the file you would like to upload.
 {% endblock %}
 
-{% block tbody_ %}
+{% block supertable %}
 <script type="text/javascript">
     function FormLoad()
     {
@@ -49,9 +49,10 @@
     }
 </script>
     <tr style =" border: none; background-color: transparent">
-        <form method="POST" enctype="multipart/form-data">
-            <td style =" border: none; background-color: transparent">
-               <input type="file" id="fileUpload" name="file" multiple onchange="OnFileValidation()" >
+        <form method="POST" enctype="multipart/form-data" style="max-high: 50%">
+            <td style =" border: none; background-color: transparent; ">
+               <input type="file" id="fileUpload" name="file" multiple onchange="OnFileValidation()"
+                      style="font-family: georgia; font-size: 17px;">
             </td>
             <td style =" border: none; background-color: transparent">
                 <input type="submit" value="Upload" id="submit_button">

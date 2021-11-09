@@ -252,7 +252,7 @@ class ContactbookPSQL(Contactbook):
                     Contact,
                     values={
                         Contact.name: contact.name,
-                        Contact.birthday: contact.birthday,
+                        Contact.birthday: contact.birthday if contact.birthday else None,
                     },
                 ).filter(Contact.contact_id == contact_id)
             )

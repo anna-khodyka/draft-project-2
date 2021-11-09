@@ -3,12 +3,12 @@ html { font-family: sans-serif; background: #eee; padding: 1rem; }
       position:relative;
      }
     #table-scroll {
-      height:350px;
+      height:450px;
       overflow:auto;
       margin-top:20px;
     }
     #big-table-scroll {
-      height:600px;
+      height:700px;
       overflow:auto;
       margin-top:20px;
     }
@@ -77,7 +77,7 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .content input, .content textarea { margin-bottom: 1em; }
 .content textarea { min-height: 12em; resize: vertical; }
 input.danger { color: #cc2f2e; }
-input[type=submit], input[type=submit] { align-self: start; min-width: 10em; background-color: #90bede;
+input[type=submit], input[type=file] { align-self: start; min-width: 10em; background-color: #90bede;
 	  border: 2 px solid white;
 	  border-radius:10px;
       -moz-border-radius:10px;

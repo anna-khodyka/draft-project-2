@@ -23,7 +23,7 @@
 
 {% block supertable %}
 {% if result %}
-		<div class="record-note" style="width: 18%; float: left; text-align: left;" >
+		<div class="record-note" style="width: 20%; float: left; text-align: left;" >
                ID
         </div>
         <div class="record-note" style="width: 50%; float: left; text-align: center;">
@@ -37,7 +37,7 @@
         </div>
 	<form method = "POST">
 		{%for res in result %}
-		<div class="record-note" style="width: 18%; float: left; text-align: left;" >
+		<div class="record-note" style="width: 20%; float: left; text-align: left;" >
                 <a href =/contact/contact_detail/{{res.contact_id}}>ID {{res.contact_id}}</a>
         </div>
         <div class="record-note" style="width: 50%; float: left; text-align: center;">
