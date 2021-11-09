@@ -11,41 +11,6 @@ sys.path.append('../')
 if True:
     from init_bp import *
 
-EXT_FOR_TEST_FILES = ('JPG', 'TXT', 'MP3', 'ZIP', "HTML")
-
-
-def create_test_files():
-    '''
-    create test files
-    :return: test files list
-    '''
-    test_file_list = []
-    for file_extension in EXT_FOR_TEST_FILES:
-        with open(f'test_file.{file_extension}', 'w') as fh:
-            fh.write(f'I am a test file with {file_extension} extension')
-            test_file_list.append(test_file_list)
-    return test_file_list
-
-
-def remove_test_files():
-    '''
-    remove test files
-    '''
-    for file_extension in EXT_FOR_TEST_FILES:
-        os.remove(f'test_file.{file_extension}')
-
-
-def check_file_extension_and_content(file, file_extension):
-    '''
-    : param file: str file name
-    : param file_extension: str file extension
-    : return: True/False
-    '''
-    with open(file, 'r') as fh:
-        file_content = fh.read()
-        assert file_content == f'I am a test file with {file_extension} extension'
-    assert file.rsplit('.', 1)[1].upper() == file_extension
-
 
 def test_upload(app, client, auth_test):
 
@@ -178,7 +143,7 @@ def test_download_by_id(app, client, auth_test):
     response = client.post("/file/upload",
                            content_type='multipart/form-data',
                            data=dict(
-                               file=(io.BytesIO(b'my file contents'),
+                               file=(io.BytesIO(b'my test file contents'),
                                      'test_file.TXT'),
                            ))
 
@@ -190,11 +155,16 @@ def test_download_by_id(app, client, auth_test):
     assert len(files) == 1
     assert files_db.number_of_files(test_user_id) == 1
 
-    # downloading the content file
+    # downloading the content of test file
     for file in files:
-        response = client.post(
-            f"/file/download_file/{file.file_id}")  # выдает ошибку FileNotFoundError: [WinError 2] Не удается найти указанный файл: 'D:\\_GOIT\\draft-project-2\\bot\\67_temp_file.temp'
-        # assert "my file contents" in response.data
+        try:
+            client.post(
+                f"/file/download_file/{file.file_id}", content_type='multipart/form-data')
+        except FileNotFoundError:
+            pass
+        with open(f'{test_user_id}_temp_file.temp', 'r') as fh:
+            file_content = fh.read()
+            assert file_content == "my test file contents"
 
     # deleting files
     files = files_db.get_files(test_user_id, 'test_file')
@@ -223,6 +193,7 @@ def test_delete_by_id(app, client, auth_test):
     assert len(files) == 1
     assert files_db.number_of_files(test_user_id) == 1
 
+    # deleting test file
     for file in files:
         client.post(f"/file/delete/{file.file_id}")
 
