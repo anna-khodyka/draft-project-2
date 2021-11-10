@@ -7,6 +7,7 @@
 </head>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 <div align="center">
 	<div style= "width: 50%;
 	height:100%;
@@ -28,6 +29,21 @@
 					<a href= /bot-command>Return to BOT nest</a><br>&nbsp;
 				</div>
 	</div>
+</div>
+<br>
+<div style="width:50%;
+			height:auto;
+			margin: 0 auto;
+			background-color: white;
+			border-radius:10px;
+			border: 1px solid #bcdbe8;
+			align: center;">
+			{% block upload %}{% endblock %}
+</div>
+
+<div align = 'center'>
+			{% block links_ %}{% endblock %}
+
 </div>
 
 <div align = 'center' >
@@ -73,4 +89,5 @@
 			{% block links %}{% endblock %}
 
 </div>
+
 </html>
