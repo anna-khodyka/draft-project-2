@@ -19,9 +19,11 @@ if __package__ == "" or __package__ is None:
 else:
     from .SQL_alchemy_classes import *
 
-POSTGRES_DB = os.environ.get("BD_HOST", "localhost")
+BD_HOST = os.environ.get("BD_HOST", "localhost")
+BD_USERNAME = os.environ.get("BD_USERNAME", "postgres")
+BD_PASSWORD = os.environ.get("BD_PASSWORD", "1234")
 engine = create_engine(
-    "postgresql+psycopg2://postgres:1234@" + POSTGRES_DB + "/contact_book", echo=True
+    "postgresql+psycopg2://"+BD_USERNAME+":"+BD_PASSWORD+"@"+BD_HOST + "/contact_book", echo=True
 )
 DBSession = sessionmaker(bind=engine)
 Base.metadata.bind = engine

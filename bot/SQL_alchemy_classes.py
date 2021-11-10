@@ -6,6 +6,8 @@ Define SQLAlchemy ORM classes for Contact-book and Notebook entities
 # pylint: disable=C0103
 # pylint: disable=W0703
 
+import os
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -17,10 +19,16 @@ from sqlalchemy import (
     Date,
     LargeBinary,
     BIGINT,
-    Text
+    Text,
+    inspect,
+    MetaData,
+    create_engine,
+
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import sessionmaker
+
 
 Base = declarative_base()
 
@@ -196,3 +204,31 @@ def run_sql(session, sql_stmt):
     except Exception as error:
         session.rollback()
         return error
+
+def database_is_empty(engine):
+        table_names = inspect(engine).get_table_names()
+        is_empty = table_names == []
+        print('Db is empty: {}'.format(is_empty))
+        return is_empty
+
+def create_tables(engine):
+        Base.metadata.create_all(bind=engine)
+
+
+if __name__ == '__main__':
+    BD_HOST = os.environ.get("BD_HOST", "localhost")
+    BD_USERNAME = os.environ.get("BD_USERNAME", "postgres")
+    BD_PASSWORD = os.environ.get("BD_PASSWORD", "1234")
+    print("BD_PASSWORD: ", BD_PASSWORD)
+    engine = create_engine(
+        "postgresql+psycopg2://"+BD_USERNAME+":"+BD_PASSWORD+"@"+BD_HOST + "/contact_book", echo=True
+    )
+    if database_is_empty(engine):
+        try:
+            create_tables(engine)
+        except Exception as error:
+            print(str(error))
+    create_tables(engine)
+    DBSession = sessionmaker(bind=engine)
+    Base.metadata.bind = engine
+    pgsession = DBSession()
