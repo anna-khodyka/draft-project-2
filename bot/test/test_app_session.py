@@ -1,5 +1,3 @@
-from init_bp import before_request
-# from main import init_app
 import sys
 import os
 
@@ -12,6 +10,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 sys.path.append('../')
 if True:
     from main import init_app
+    from init_bp import before_request
 
 
 def test_request_context(app, client):
@@ -27,17 +26,17 @@ def test_request_context(app, client):
         assert len(flask_session) == 0
 
 
-def test_session_context(app, client):
-    with app.app_context():
-        with open('context.log', 'w') as log:
-            assert 'db' not in flask_session
-            flask_session['db'] = 'choosed'
-            assert 'db' in flask_session
-            log.write(str(flask_session))
-            log.write('\n')
-            response = client.post('/login/register', data={'User_name': 'pytest',
-                                                            'Login': 'pytest',
-                                                            'Password': 'pytest'})
-            log.write(str(app.app_ctx_globals_class.pop()))
-            log.write('\n')
-            assert 'db' in flask_session
+# def test_session_context(app, client):
+#     with app.app_context():
+#         with open('context.log', 'w') as log:
+#             assert 'db' not in flask_session
+#             flask_session['db'] = 'choosed'
+#             assert 'db' in flask_session
+#             log.write(str(flask_session))
+#             log.write('\n')
+#             response = client.post('/login/register', data={'User_name': 'pytest',
+#                                                             'Login': 'pytest',
+#                                                             'Password': 'pytest'})
+#             log.write(str(app.app_ctx_globals_class.pop()))
+#             log.write('\n')
+#             assert 'db' in flask_session

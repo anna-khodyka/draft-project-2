@@ -7,6 +7,7 @@ Testing validator for contact add- and edit- handlers
 #pylint: disable=W0401
 #pylint: disable=C0413
 
+import pytest
 import sys
 import os
 
@@ -14,8 +15,8 @@ import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 sys.path.append('../')
-import pytest
-from validate import *
+if True:
+    from validate import *
 
 phones = ['099-070-090-90', '099&9/08887+090-0', '90()899-83 0000']
 
@@ -45,7 +46,7 @@ def test_name_checker(name):
     assert valid is False
 
 
-birthdays = ['', '7' * 51, '1900-00-00', '1900-15-15', False]
+birthdays = ['7' * 51, '1900-00-00', '1900-15-15']
 
 
 @pytest.mark.parametrize('birthday', birthdays)
@@ -59,7 +60,7 @@ def test_birthday_checker(birthday):
     assert valid is False
 
 
-zips = ['', '7' * 51, 'dsfdsf', '(090)00', False]
+zips = ['7' * 51, 'dsfdsf', '(090)00', False]
 
 
 @pytest.mark.parametrize('zip_code', zips)
@@ -73,8 +74,8 @@ def test_zip_checker(zip_code):
     assert valid is False
 
 
-
 countries = [None, 'a' * 51, 900, False, 'ar%%ar', "*awar$", ]
+
 
 @pytest.mark.parametrize('country', countries)
 def test_country_checker(country):
@@ -126,7 +127,9 @@ def test_street_checker(street):
     if isinstance(street_, str):
         assert re.search(r'[^a-zA-Z\-]', street_) is None
 
+
 houses = [None, 'a' * 12, 12133900, False, '&arar', "*awar$", ]
+
 
 @pytest.mark.parametrize('house', houses)
 def test_house_checker(house):
@@ -141,6 +144,7 @@ def test_house_checker(house):
     assert valid is True
     valid, error, house_ = house_checker('123a')
     assert valid is True
+
 
 @pytest.mark.parametrize('apartment', houses)
 def test_apartment_checker(apartment):
