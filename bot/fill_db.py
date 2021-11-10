@@ -88,7 +88,10 @@ Python 3.9.8 and Python 3.11.0a2 with a fixed Tcl/Tk version.
     ]
 }
 
-files = {"data/intents.json": ["intents.json"], "data/classes.pkl": ["classes.pkl"], "data/words.pkl": ["words.pkl"]}
+files = {"data/intents.json": ["intents.json", 'WEB'],
+         "data/classes.pkl": ["classes.pkl", 'data'],
+         "data/words.pkl": ["words.pkl", 'data'],
+         "static/ginger bird.png": ["ginger bird.png", 'images']}
 
 
 def insert_users(session):
@@ -143,6 +146,7 @@ def insert_users(session):
                     print("scipped address for user ID ", id)
 
             for key in notes.keys():
+                done = False
                 for k in range(0, len(notes[key])):
                     try:
                         note = Note(text=notes[key][k],
@@ -150,9 +154,11 @@ def insert_users(session):
                                     )
                         session.add(note)
                         session.commit()
-                        tag = Tag(tag=key, user_id=user.id)
-                        session.add(tag)
-                        session.commit()
+                        if not done:
+                            tag = Tag(tag=key, user_id=user.id)
+                            session.add(tag)
+                            session.commit()
+                            done = True
                         tag_and_note = TagsAndNotes(tag_id=tag.tag_id, note_id=note.note_id)
                         session.add(tag_and_note)
                         session.commit()
@@ -174,7 +180,7 @@ def insert_users(session):
                             name=files[key][0],
                             file_date=datetime.now(),
                             file_length=100,
-                            file_type=file_type,
+                            file_type=files[key][1],
                             file=file.read()
                         )
                         session.add(file)
