@@ -186,7 +186,7 @@ def test_find_contact(app, client, auth_test):
     response = client.post('/contact/add_contact', data=TEST_EDIT_DICT)
 
     response = client.get('/contact/find_contact')
-    assert b'Input search string: name or phone or even a part of it' in response.data
+    assert b'Input search string: name or phone' in response.data
 
     response = client.post('/contact/find_contact',
                            data={'Keywords': 'wrong keyword'})
@@ -215,13 +215,13 @@ def test_show_all_contact(app, client, auth_test):
     auth_test.login()
 
     response = client.get('/contact/show_all_contacts')
-    assert b'All the contacts from your address book. Click ID to see details' in response.data
+    assert b'All the contacts from your address book' in response.data
 
     response = client.post('/contact/show_all_contacts')
     assert response.status_code == 405
 
     response = client.get('/contact/show_all_contacts', data={'some': 'wrong'})
-    assert b'All the contacts from your address book. Click ID to see details' in response.data
+    assert b'All the contacts from your address book' in response.data
 
 
 def test_contact_detail(app, client, auth_test):
@@ -312,9 +312,8 @@ def test_delete_contact(app, client, auth_test):
     assert len(contact) == 1
 
     response = client.get(f'/contact/delete_contact/{contact[0].contact_id}')
-    # assert b'succesfully deleted' in response.data
+    assert b'successfully deleted' in response.data
 
-    # contacts = ContactbookPSQL(pgsession)
     contact = contacts.get_contacts(test_user_id, TEST_EDIT_DICT['Name'])
     assert len(contact) == 0
 
