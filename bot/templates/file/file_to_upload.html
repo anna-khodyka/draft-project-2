@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block upload %}
+
 <script type="text/javascript">
     function FormLoad()
     {
@@ -48,6 +49,7 @@
                }
     }
 </script>
+
     <tr style =" border: none; background-color: transparent">
         <form method="POST" enctype="multipart/form-data" style="max-high: 50%">
             <td style =" border: none; background-color: transparent; ">
@@ -63,13 +65,14 @@
 {% endblock%}
 
 {% block links_ %}
+
 <table style =" border: none; background-color: transparent">
 
     <tr style =" border: none; background-color: transparent">
         <td tyle =" border: none; background-color: transparent">
         <h3>There are some limits for repository size for each user:</h3>
             <p>&nbsp;&nbsp; &nbsp; -&nbsp; Max file size  - {{max_size}}Mb </p>
-            <p> &nbsp; &nbsp; -&nbsp; Total number  - {{total_file}} files </p>
+            <p> &nbsp; &nbsp;&nbsp; -&nbsp; Total number  - {{total_file}} files </p>
             <p><b>Now you are used {{used_file}}/{{total_file}}</b></p>
         </td>
     </tr>
@@ -79,5 +82,4 @@
 </body>
 {% endblock %}
 
-	            
    
