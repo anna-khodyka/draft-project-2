@@ -4,21 +4,58 @@
 	News
 {% endblock %}
 
+{% block header %}
+Important news for today:
+<p></p>
+<div>
+    <a href= /bot-command>Return to BOT nest</a>
+</div>
+{% endblock %}
+
 {% block content %}
+<style>
+table, th, td, tr {
+        border: 1px solid white;
+        border-collapse: collapse;
+        border-radius: 10px 10px 10px 10px;
+                  }
+table { width: 98%;
+        margin: auto;
+        font-family: arial, sans-serif;
+        border-radius: 10px 10px 10px 10px;
 
-  <p align = 'center'><a href= /bot-command>Return to BOT embrace</a></p>
-    <table>
-     {% for feed_ in feed %}
-        <tr>
-          <td>
-              <h2>{{feed_.header}}</h2>
-              <p></p>
-              {{feed_.body}}
-              <p class = 'source' ><i>Source: {{feed_.url}}</i></p>
-          </td>
-        </tr>
-     {% endfor%}
-    </table>
+      }
+tr:nth-child(odd) {
+    background-color: #bcdbe8;
+    }
+th { font-family: arial, sans-serif;
+      background-color: #dce6f2;
+    }
+th, td {
+    padding: 5px;
+    }
+h2 {
+    text-align: center;
+    font-size: 18px;
+    color: #800000;
+    font-family: georgia, sans-serif;}
 
+.source { font: 11px arial, sans-serif; font-weight: italic; }
+
+p { align: center; font-size: 15px; font-family: sans-serif; }
+</style>
+
+<table>
+ {% for feed_ in feed %}
+    <tr>
+      <td>
+          <h2>{{feed_.header}}</h2>
+          <p>
+          {{feed_.body}}</p>
+          <p class = 'source' ><i>Source: {{feed_.url}}</i></p>
+      </td>
+    </tr>
+ {% endfor%}
+</table>
 
 {% endblock %}

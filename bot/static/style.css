@@ -1,9 +1,4 @@
-html { font-family: sans-serif; background: url('/static/background.jpg');
-        -webkit-background-size: cover;
-         -moz-background-size: cover;
-         -o-background-size: cover;
-         background-size: cover;
-         background-repeat: no-repeat, repeat;}
+html { font-family: sans-serif; background: #eee; padding: 1rem; }
   #table-wrapper {
       position:relative;
      }
@@ -15,7 +10,7 @@ html { font-family: sans-serif; background: url('/static/background.jpg');
     #big-table-scroll {
       height:600px;
       overflow:auto;
-      margin-top:20px;
+      margin-top:15px;
     }
   .record-note { width:95%;
 				background-color: #bcdbe8;
@@ -24,7 +19,7 @@ html { font-family: sans-serif; background: url('/static/background.jpg');
                 border-radius: 10px 10px 10px 10px;
                 padding: 10px 10px 10px 10px;
                 font-family: georgia;
-                font-size: 20px;}
+                font-size: 15px;}
 
   .right_column{
             width:58%;
@@ -51,12 +46,13 @@ body { max-width: 1920px; margin: auto; background: url('/static/background.jpg'
          background-size: cover;
          background-repeat: no-repeat, repeat;
          font-family: georgia;
+         height: 850px;
         }
 h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
-a { color: #377ba8; font-family: georgia; font-size: 20px;}
+a { color: #377ba8; font-family: georgia; font-size: 15px;}
 textarea {
     font-family: georgia;
-    font-size: 20px;
+    font-size: 15px;
     border-radius: 10px 10px 10px 10px;
     border: 1px solid white;
     padding: 10px 10px 10px 10px;}
@@ -93,7 +89,7 @@ input[type=submit], input[type=file] { align-self: start; min-width: 10em; backg
 	  margin: 4px 2px;
 	  cursor: pointer;
 	  font-family: georgia, sans-serif;
-	  font-size: 18px; }
+	  font-size: 15px; }
 input[type=text], input[type=email], input[type=date], input[type=password]
       { align-self: start;
       min-width: 10em;
@@ -113,7 +109,7 @@ input[type=text], input[type=email], input[type=date], input[type=password]
 .buttonsave {
     background-color: #90bede;
     transition-duration: 0.4s;
-    font-size: 16px;
+    font-size: 15px;
     color: white;
     border: 2px solid #008CBA; /* Blue */
     transition-duration: 0.4s;
@@ -130,6 +126,6 @@ table {
     margin: auto;
 	border: 1px solid black;
 	font-family: georgia, sans-serif;
-	font-size: 18px;
+	font-size: 15px;
    }
 
