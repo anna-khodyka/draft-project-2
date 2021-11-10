@@ -4,67 +4,14 @@
 Login user
 {% endblock %}
 
+{% block header %}
+Please input login and password:
+{% endblock %}
 
 {% block content %}
-<style>
-p {font-size: 20px; font-family: georgia; }
-html { font-family: georgia; padding: 1rem;
-        background-color: #F0FFF0;
-        -webkit-background-size: cover;
-         -moz-background-size: cover;
-         -o-background-size: cover;
-         background-size: cover;
-         font-family: georgia;}
-body { max-width: 1920px; margin: auto; background: url('/static/background.jpg') no-repeat center center fixed;
-        -webkit-background-size: cover;
-         -moz-background-size: cover;
-         -o-background-size: cover;
-         background-size: cover;
-         font-family: georgia;}
-
-table {
-    width: 50%;
-    border-spacing: 5px;
-    border-collapse: collapse;
-    margin: auto;
-	border: 1px solid black;
-	font-family: georgia, sans-serif;
-	font-size: 18px;
-   }
-
-table, th, td, tr {
-	    padding: 5px;
-        background: #A9E2CC;
-        border: 1px solid black;}
-input[type=submit], input[type=submit] { align-self: start; min-width: 10em; background-color: #90bede;
-	  border: 2 px solid black;
-	  border-radius:10px;
-      -moz-border-radius:10px;
-      -webkit-border-radius:10px;
-	  color: black;
-	  padding: 8px 32px;
-	  text-decoration: none;
-	  margin: 4px 2px;
-	  cursor: pointer;
-	  font-family: georgia, sans-serif;
-	  font-size: 18px; }
-input[type=text], input[type=email], input[type=password] { align-self: start; min-width: 10em; background-color: #dce6f2;
-	  border: 2 px solid black;
-	  border-radius:10px;
-      -moz-border-radius:10px;
-      -webkit-border-radius:10px;
-	  color: black;
-	  padding: 8px 32px;
-	  text-decoration: none;
-	  margin: 4px 2px;
-	  cursor: pointer;
-	  font-family: georgia, sans-serif;
-	  font-size: 15px; }
-</style>
-
-<h2 align="center">Please input login and password:</h2>
+<div class = "record-note" style="padding: 5px 5px 5px 5px; width: 98%; margin: 2px;">
 <form method="POST" name="Login">
-  <table width = 50% align = 'center'>
+  <table style="border: 0px solid white; width:90%; ">
     <tbody>
     {% if get_flashed_messages() %}
       <tr>
@@ -97,7 +44,7 @@ input[type=text], input[type=email], input[type=password] { align-self: start; m
 
   </form>
 
-<br>
     <p align="center"><a href="/login/register">Register a new user</a></p>
-<br>
+</div>
+
 {% endblock %}

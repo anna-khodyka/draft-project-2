@@ -1,20 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-          crossorigin="anonymous"
-  />
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+<div align="center">
+	<div style= "width: 50%;
+	           height:100%;
+               float: center;
+               background-color: #f0c975;
+               border-radius:10px;
+               border: 1px solid white;">
+				<div>
+				<div style="width:10%; float: left;">
+				<img src="{{ url_for('static', filename='ginger bird mirror.png') }}"
+					   style="width: 50px; height: 50px; position: relative;
+						top: 5px; right: 0px; ">
+				</div>
+				<div style="width:90%; float:left; ">
+				<h2 align = "center">{% block header %} {% endblock %}</h2>
+				</div><br>&nbsp;
+				</div>
 
-{% block content %}
-{% endblock %}
+	</div>
+</div>
+<br>
+<div id="table-wrapper">
+	<div id="big-table-scroll">
+		<div style="width:50%;
+					height:auto;
+					margin: 0 auto;
+					background-color: white;
+					border-radius:10px;
+					border: 1px solid #bcdbe8;">
+
+			{% block content %}{% endblock %}
+</div>
+    </div>
+</div>
+
+<div align = 'center' style="height:300px;">
+	{% block supertable %}{% endblock %}
+</div>
 
 </html>
