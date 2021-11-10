@@ -1,10 +1,28 @@
 # draft-project-2
+Peronal assistant Bot - Team Project # 2 for GOIT Python WEB course.
 
-All the new features are working:
+Stack of technology:
 
-    - upload, download, sorting files. files stored in blob fields of PostgresDB
-    - tags added to Notes
-    - news feed from AIOHTTP project integrated with bot
-    - data connected to users, all users have separate scope of contacts and notes
-    
+- Flask as web wramework
+- PostgreSQL as database engine
+- SQLALchemy for ORM
+- Keras/tensorflow for user command prediction
+- HTML&CSS&JS for front end 
+
+Basic features of personal assistant:
+
+    - User contacts management (Contactbook)
+    - User notes  managemet (Note book)
+    - File repository  (File manager)
+    - User news feed (Web spyder)
+
+To start app:
+
+    Set up enviroment variable:
+    FLASK_APP: main.py:inint_app()
+
+When app started with empty database (database contact_book created with docker compose or manually), app would create relations using SQLAlchemy ORM models. Then it filled up DB with tutorial data.
+
+
+
 
