@@ -63,8 +63,9 @@ def before_request():
     if ("user" not in session or session["user"] is None) and request.endpoint not in [
         "login.login",
         "login.register",
-    ]:
+    ] and request.endpoint != 'static':
         return redirect(url_for("login.login"))
+    print("Static url:")
     return None
 
 

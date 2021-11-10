@@ -9,10 +9,11 @@
 {% endblock %}
 {% block supertable %}
   {%for res in result %}
-     <div class="record-note" style="width: 18%; float: left; text-align: left;" >
+
+     <div class="record-note" style="width: 20%; float: left; text-align: left;" >
                 <a href =/contact/contact_detail/{{res.contact_id}}>ID {{res.contact_id}}</a>
         </div>
-        <div class="record-note" style="width: 70%; float: right; text-align: center;">
+        <div class="record-note" style="width: 60%; float: right; text-align: center;">
                 {{res.name}}
         </div>
         <div>

@@ -1,4 +1,9 @@
-html { font-family: sans-serif; background: #eee; padding: 1rem; }
+html { font-family: sans-serif; background: url('/static/background.jpg');
+        -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover;
+         background-repeat: no-repeat, repeat;}
   #table-wrapper {
       position:relative;
      }
@@ -8,7 +13,7 @@ html { font-family: sans-serif; background: #eee; padding: 1rem; }
       margin-top:20px;
     }
     #big-table-scroll {
-      height:700px;
+      height:600px;
       overflow:auto;
       margin-top:20px;
     }

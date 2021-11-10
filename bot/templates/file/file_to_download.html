@@ -28,35 +28,17 @@
 	font-family: georgia, sans-serif;
 	font-size: 18px;
    }
- .first-column {
-        width: 80%;
-         text-align: left;
-         background-color: #f0c975;
-         float: left;
-         border: 1px solid white;
-         border-radius: 0px 15px 15px 15px;
-         padding: 5px 5px 5px 15px;
-         font-family: georgia ;
-            font-size: 20px;
-    }
-    .second-column {
-        width: 40%;
-            text-align: left;
-            background-color:  #bcdbe8;
-            float: left;
-            border: 1px solid white;
-            border-radius: 15px 0px 15px 15px;
-            padding: 5px 5px 5px 15px;
-            font-family: georgia ;
-            font-size: 20px;
-    }
+   td, th {
+        font-size: 15px;
+   }
+
 </style>
 <div class="record-note" style="padding: 5px 5px 5px 5px;">
 <div align = 'center'>
 <div id="table-wrapper">
-<table >
+<table>
     <tr>
-      <th width = 30%>
+      <th style="min-width: 10%; " >
           <form name = 'select_type'
                 method = 'POST'
                 action='/file/download'>
@@ -70,37 +52,44 @@
                   {% endif %}
               </select>
               <p></p>
-              <input type = submit value="Filter files by type" id = 'filter_files'>
+              <input type = submit value="Filter files" id = 'filter_files' style="font-size: 15px; align: center; width: 60px;">
           </form>
       </th>
 
-      <th width = 30%>Name</th>
-      <th width = 15%>Size</th>
-      <th width = 10%> </th>
-      <th width = 10%> </th>
+      <th style="max-width: 30%" >Name</th>
+      <th style="max-width: 15%">Size</th>
+      <th style="max-width: 10%"> </th>
+      <th style="max-width: 10%"> </th>
     </tr>
 
 {% if files %}
 
       {%for file in files %}
         <tr>
-            <td class="first-column">
+            <td><div style="text-align: left;
+                     background-color: #f0c975;
+                     float: left;
+                     border: 1px solid white;
+                     border-radius: 0px 15px 15px 15px;
+                     padding: 5px 5px 5px 15px;
+                     font-family: georgia ;
+                     font-size: 15px; width: 80%;">
                 {{file.file_type}}
+            </div>
             </td>
 
             <td><div style="width: 90%;
-
-            background-color:  #bcdbe8;
-            float: left;
-            border: 1px solid white;
-            border-radius: 15px 0px 15px 15px;
-            padding: 5px 5px 5px 15px;
-            font-family: georgia ;
-            font-size: 20px;">
+                            background-color:  #bcdbe8;
+                            float: left;
+                            border: 1px solid white;
+                            border-radius: 15px 0px 15px 15px;
+                            padding: 5px 5px 5px 15px;
+                            font-family: georgia ;
+                            font-size: 15px;">
                 {{file.name}}
             </div>
             </td>
-             <td><div style="width: 80%;
+             <td><div style="min-width: 60%;
 
             background-color:  #bcdbe8;
             float: left;
@@ -108,7 +97,7 @@
             border-radius: 15px 0px 15px 15px;
             padding: 5px 5px 5px 15px;
             font-family: georgia ;
-            font-size: 20px;">
+            font-size: 15px;">
                 {{file.file_length}} Mb
              </div>
             </td>
