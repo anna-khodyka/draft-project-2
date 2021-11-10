@@ -8,31 +8,24 @@
 	Contacts by your request: Tick the contacts to delete.
 {% endblock %}
 
-{% block theader_ %}
-
-    <tr>
-      <th width = 30%></th>
-      <th width = 70%>Contact name</th>
-    </tr>
-{% endblock %}
-
-
 {% block supertable %}
-<div>
+
     {% if result %}
     <form method = "POST" action="/contact/delete_contacts">
 
     {%for res in result %}
-    <div class="record-note" style="width: 30%; float: left; text-align: left;" >
+
+    <div class="record-note" style="max-width: 30%; float: left; text-align: left;" >
   	<input type="checkbox"
                name="Delete"
                value={{ res.contact_id }}
                id = "{{ res.contact_id }}">
-               <label for="{{ res.contact_id }}" style="color:red;">Contact ID {{ res.contact_id }}</label>
+               <label for="{{ res.contact_id }}" style="color:red; font-size: 15px;">Contact ID {{ res.contact_id }}</label>
     </div>
-    <div class="record-note" style="width: 60%; float: right; text-align: center;" >
+    <div class="record-note" style="max-width: 50%; float: right; text-align: center;" >
     {{res.name}}
     </div>
+
 
   {%endfor%}
 <div class="record-note" style="float: left; text-align: center; margin: 0 auto; width: 97%" >
@@ -42,7 +35,7 @@
     {% else %}
     <div style="font-size: 25px; font-family: georgia, background: ">Sorry, we didn't find any contact for your request</div>
     {% endif %}
-</div>
+
 
 {% endblock%}
 
