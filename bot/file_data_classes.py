@@ -33,9 +33,10 @@ extensions_ = {
     'documents' :  ('DOC', 'DOCX', 'TXT', 'PDF', 'XLSX', 'PPTX', 'PDF', 'XLS', 'DOCX', 'CSV'),
     'music': ('MP3', 'OGG', 'WAV', 'AMR'),
     'archives':  ('ZIP', 'GZ', 'TAR'),
-    'python': ('PY'),
+    'python': ('PY', ),
     'executable': ('EXE', 'MSI', 'DLL'),
-    'WEB': ("CSS", "HTML", "JSON","JS")}
+    'WEB': ("CSS", "HTML", "JSON","JS"),
+    'data': ("PKL",)    }
 
 
 class FileFolder(ABC):
@@ -110,8 +111,8 @@ class FileFolderPSQL(FileFolder):
         result = (
             self.session.query(
                 File.file_id, File.file_type, File.name, File.user_id, File.file_date, File.file_length
-            ).filter(File.user_id == user_id, File.name.like(func.lower(f"%{keyword}%")))
-            .order_by(File.file_type, File.name).all()
+            ).filter(File.user_id == user_id, func.lower(File.name).like(func.lower(f"%{keyword}%")))
+                     .order_by(File.file_type, File.name).all()
         )
         for res in result:
             self.files.append(FilePSQL(res))

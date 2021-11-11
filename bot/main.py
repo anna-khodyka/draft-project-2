@@ -22,7 +22,8 @@ if __package__ == "" or __package__ is None:
     import news_bp
     from neural_code import predict_class
     from fill_db import insert_users
-    import db_postgres
+    from db_postgres import *
+    from SQL_alchemy_classes import *
 else:
     from . import login_bp
     from . import contact_bp
