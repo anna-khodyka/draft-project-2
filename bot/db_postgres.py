@@ -21,9 +21,9 @@ else:
 
 DB_HOST = os.environ.get("DB_HOST", "localhost")
 print("DB_HOST ", DB_HOST)
-DB_USERNAME = os.environ.get("DB_USERNAME", "postgres_")
+DB_USERNAME = os.environ.get("DB_USERNAME", "postgres")
 print("DB_USERNAME ", DB_USERNAME)
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "trytoguess")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "12345")
 print("DB_PASSWORD ", DB_PASSWORD)
 
 engine = create_engine(
