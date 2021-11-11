@@ -65,9 +65,6 @@ def test_logout(app, client):
         '/login/login', data={'Login': 'test', 'Password': 'test'})
     assert response.headers['Location'] == 'http://localhost/bot-command'
 
-    response = client.post('/bot-command', data={'BOT command': 'help'})
-    assert response.headers['Location'] == 'http://localhost/help_'
-
     response = client.post('/login/logout')
     assert response.status_code == 405
 
