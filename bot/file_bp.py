@@ -40,7 +40,7 @@ def upload():
             file = request.files['file']
             result = global_var.file_db.insert_file(session['user_id'], file, max_size, total_file, used_file+1)
             if result == 0:
-                return render_template("file/add_file_ok.html")
+                return render_template("file/add_file_OK.html")
             return html_error(result)
     return render_template("file/file_to_upload.html",
                            max_size=max_size,
