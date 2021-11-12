@@ -20,14 +20,12 @@ else:
     from .SQL_alchemy_classes import *
 
 DB_HOST = os.environ.get("DB_HOST", "localhost")
-print("DB_HOST ", DB_HOST)
 DB_USERNAME = os.environ.get("DB_USERNAME", "postgres")
-print("DB_USERNAME ", DB_USERNAME)
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "12345")
-print("DB_PASSWORD ", DB_PASSWORD)
+DATA_BASE = os.environ.get("DATA_BASE", "/contact_book")
 
 engine = create_engine(
-    "postgresql+psycopg2://"+DB_USERNAME+":"+DB_PASSWORD+"@"+DB_HOST + "/contact_book", echo=True
+    "postgresql+psycopg2://"+DB_USERNAME+":"+DB_PASSWORD+"@"+DB_HOST + DATA_BASE, echo=True
 )
 DBSession = sessionmaker(bind=engine)
 Base.metadata.bind = engine
