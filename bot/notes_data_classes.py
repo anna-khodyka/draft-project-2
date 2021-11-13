@@ -119,14 +119,40 @@ class NotebookPSQL(Notebook):
                 self.session.query(
                     Note.note_id, Note.user_id, Note.text, Note.created_at
                 ).outerjoin(TagsAndNotes).outerjoin(Tag).filter(Note.user_id == user_id,
-                    or_(
-                        func.lower(Tag.tag).like(func.lower(f"%{keyword}%")),
-                        func.lower(Note.text).like(func.lower(f"%{keyword}%")),
-                    )
-                ).distinct()
-                .order_by(Note.note_id)
-                .all()
+                                                                or_(
+                                                                    func.lower(Tag.tag).like(func.lower(f"%{keyword}%")),
+                                                                    func.lower(Note.text).like(func.lower(f"%{keyword}%")),
+                                                                )
+                                                                ).distinct()
+                    .order_by(Note.note_id)
+                    .all()
             )
+            for res in result:
+                tags = self.session.query(
+                    Tag.tag
+                ).join(TagsAndNotes).filter(TagsAndNotes.note_id == res.note_id).all()
+                note = NotePSQL(res)
+                note.tags = [tag_.tag for tag_ in tags]
+                self.notes.append(note)
+            return self.notes
+        return []
+
+    def get_notes_by_tag(self, user_id, tag):
+        """
+        Select from DB Notes find by keyword for fields text, keywords
+        :param keyword: str
+        :return: list of NotePSQL
+        """
+        self.notes = []
+        if tag:
+
+            result = self.session.query(
+                Note.note_id, Note.user_id, Note.text, Note.created_at
+            ).outerjoin(TagsAndNotes).outerjoin(Tag
+                                                ).filter(Note.user_id == user_id,
+                                                         Tag.tag == tag
+                                                         ).distinct().order_by(Note.note_id).all()
+
             for res in result:
                 tags = self.session.query(
                     Tag.tag
@@ -170,18 +196,19 @@ class NotebookPSQL(Notebook):
         return result
 
     def create_tag(self, user_id, note_id, tag):
-        try:
-            if self.session.query(Tag.tag).filter(Tag.tag==tag, Tag.user_id == user_id).first() is None:
-                print("TRY TO CREATE TAG - ENTER CLASS METHOD")
-                tag = Tag(tag=tag, user_id=user_id)
-                self.session.add(tag)
-                self.session.commit()
-                print("COMMIT")
-            return 0
-        except Exception as error:
-            print(f"ERROR: {error}")
-            return str(error)
-
+        if len(tag.strip())!=0:
+            try:
+                if self.session.query(Tag.tag).filter(Tag.tag==tag, Tag.user_id == user_id).first() is None:
+                    print("TRY TO CREATE TAG - ENTER CLASS METHOD")
+                    tag = Tag(tag=tag, user_id=user_id)
+                    self.session.add(tag)
+                    self.session.commit()
+                    print("COMMIT")
+                return 0
+            except Exception as error:
+                print(f"ERROR: {error}")
+                return str(error)
+        return 0
 
     def update_note(self, note_id, tags, text):
         """

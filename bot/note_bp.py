@@ -61,7 +61,7 @@ def find_notes():
 
 @note_bp.route("/find_notes/<tag>/<target>", methods=["GET", "POST"])
 def find_notes_by_tag(tag, target):
-    results = global_var.note_book.get_notes(session['user_id'], tag)
+    results = global_var.note_book.get_notes_by_tag(session['user_id'], tag)
     if isinstance(results, str):
         return html_error(results)
     for i in range(0, len(results)):
