@@ -7,8 +7,6 @@ import threading
 import os
 import sys
 from flask import Flask
-from sqlalchemy import *
-
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -43,17 +41,17 @@ def init_app(config=None):
     :return: app Flask.app instance
     """
     SECRET_KEY = bytes(os.environ.get("SECRET_KEY", "gadklnl/dad/;jdisa;l990q3"), 'utf-8')
-    is_empty =database_is_empty(engine)
-    if is_empty:
-        try:
-            create_tables(engine)
-            insert_users(pgsession)
-        except Exception as error:
-            return str(error)
+    #is_empty =database_is_empty(engine)
+    #if is_empty:
+    #    try:
+    #        create_tables(engine)
+    #        insert_users(pgsession)
+    #    except Exception as error:
+    #        return str(error)
     app = Flask(__name__, instance_relative_config=True)
     if not config:
-        predict_warmup = threading.Thread(target=predict_class, args=("warm up",))
-        predict_warmup.start()
+        #predict_warmup = threading.Thread(target=predict_class, args=("warm up",))
+        #predict_warmup.start()
         app.before_request_funcs[None] = [init_bp.before_request]
         app.config.from_mapping(
             DEBUG=False,
@@ -71,3 +69,6 @@ def init_app(config=None):
 
 
     return app
+
+if __name__ == "__main__":
+    init_app()

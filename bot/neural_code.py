@@ -15,11 +15,11 @@ import sys
 import os
 import json
 import pickle
-import numpy as np
+from numpy import array
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
-import nltk
+from nltk import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 
@@ -56,7 +56,7 @@ def clean_up_sentence(sentence):
     :param sentence:
     :return: list (of words)
     """
-    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = word_tokenize(sentence)
     sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
     return sentence_words
 
@@ -74,7 +74,7 @@ def bag_of_words(sentence, words):
         for i, word in enumerate(words):
             if word == word_:
                 bag[i] = 1
-    return np.array(bag)
+    return array(bag)
 
 
 def predict_class(sentence):
@@ -87,7 +87,7 @@ def predict_class(sentence):
     """
     intents, words, classes, model = load_saved_data()
     bow = bag_of_words(sentence, words)
-    res = model.predict(np.array([bow]))[0]
+    res = model.predict(array([bow]))[0]
     ERROR_THRESHOLD = 0.55
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
