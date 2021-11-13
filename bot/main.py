@@ -50,8 +50,8 @@ def init_app(config=None):
     #        return str(error)
     app = Flask(__name__, instance_relative_config=True)
     if not config:
-        #predict_warmup = threading.Thread(target=predict_class, args=("warm up",))
-        #predict_warmup.start()
+        predict_warmup = threading.Thread(target=predict_class, args=("warm up",))
+        predict_warmup.start()
         app.before_request_funcs[None] = [init_bp.before_request]
         app.config.from_mapping(
             DEBUG=False,
