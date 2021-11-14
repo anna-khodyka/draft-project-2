@@ -132,7 +132,7 @@ exec_command = {
     ],
     "show all notes": [
         "note.show_all_notes",
-        "show all_notes: Print all the records of address book ",
+        "show all notes: Print all the records of address book ",
     ],
     "help": ["init.help_", "help: Print a list of the available commands"],
     "add note": ["note.add_note", "add note: Add new text note "],
