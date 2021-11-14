@@ -54,7 +54,7 @@ def download_by_id(file_id):
         file = global_var.file_db.get_file_by_id(file_id)
         with open (f"{session['user_id']}_temp_file.temp", 'wb') as temp:
             temp.write(file.file)
-        return send_file(f"{session['user_id']}_temp_file.temp", download_name=file.name)
+        return send_file(f"{session['user_id']}_temp_file.temp", download_name=file.name, as_attachment=True)
 
 
 @file_bp.route("/delete/<file_id>", methods=["POST"])
