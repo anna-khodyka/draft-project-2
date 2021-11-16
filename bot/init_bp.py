@@ -103,12 +103,18 @@ def bot():
     POST - handle user intentions
     :return: rendered HTML
     """
+    global command_history
+    if session["history"] is False or session["user_id"] not in command_history.keys():
+        command_history[session["user_id"]] = {}
+        command_history[session["user_id"]]["command"] = "response"
+        session["history"] = True
+
     if request.method == "POST":
         command = request.form.get("BOT command")
         neural_response = listener(command)
-        command_history[command] = neural_response["description"]
+        command_history[session["user_id"]][command] = neural_response["description"]
         return redirect(url_for(exec_command[neural_response["to_call"]][0]))
-    return render_template("bot_page.html", command_history=command_history)
+    return render_template("bot_page.html", command_history=command_history[session["user_id"]])
 
 
 # end of routes section

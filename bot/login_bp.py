@@ -79,6 +79,7 @@ def do_the_login(request_):
     if error is None:
         session["user_id"] = str(user.user_id)
         session["user"] = user.user_name
+        session["history"] = False
         return redirect(url_for("init.bot"))
     flash(error)
     return render_template("login/log.html")
@@ -93,4 +94,5 @@ def logout():
     session.clear()
     session["user"] = None
     session["db"] = "choosed"
+    session["history"] = False
     return redirect(url_for("login.login"))
