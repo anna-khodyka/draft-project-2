@@ -8,6 +8,28 @@
 	Please input Contact details
 {% endblock %}
 
+{% block js%}
+<script type="text/javascript">
+    var count = 0;
+    function add_phone_click(){
+        td_to_write = document.getElementById("phone_div");
+        count = count +1;
+        for (i = 0; i<count; i++)
+        {
+             sessionStorage.setItem("phone"+i.toString(), document.getElementById("phone"+i.toString()).value);
+        }
+        td_to_write.innerHTML = td_to_write.innerHTML+ '<div><input type="text" id="phone'+count.toString()+'" name="Phone" style="width: 80%; border: 1px solid white;"></div>';
+        for (i = 0; i<count; i++)
+        {
+             document.getElementById("phone"+i.toString()).value = sessionStorage.getItem("phone"+i.toString());
+             sessionStorage.removeItem("phone"+i.toString());
+        }
+
+    }
+</script>
+
+{% endblock %}
+
 {% block supertable %}
 <div class = "record-note" style="padding: 5px 5px 5px 5px;">
 <form method = "POST">
@@ -26,9 +48,35 @@
         <td align="left"> 
             <div>Phone list </div>
         </td> 
-        <td align="left"> 
-            <div><input type="text" name="Phone"  placeholder = "{{form_dict['Phone']['value']}}"
-                        style="width: 90%; border: 1px solid white;"></div>
+        <td align="left">
+            <div style="color:none; border:0px white;" id="phone_div">
+            {% if form_dict['Phone']['value'] %}
+                {%  for phone in  form_dict['Phone']['value'].split(",") %}
+                <div>
+                    <input type="text" name="Phone"  value = "{{phone}}"
+                        style="width: 80%; border: 1px solid white;">
+                </div>
+                {% endfor%}
+            {% else%}
+                <div id="phone_input">
+                    <input id="phone0" type="text" name="Phone"  value = ""
+                        style="width: 80%; border: 1px solid white;">
+                </div>
+            {% endif %}
+            </div>
+            <div style="text-align:center;">
+                <input type="button"
+                       value="Add one more phone"
+                       id="add_phone"
+                       onclick="add_phone_click()"
+                       style=" background-color: #bcdbe8;
+                               margin: 0 auto;
+                               border: 2px solid white;
+                               border-radius: 10px 10px 10px 10px;
+                               padding: 10px 10px 10px 10px;
+                               font-family: georgia;
+                               font-size: 15px; ">
+            </div>
             <div style="color:red;">{{form_dict['Phone']['error_message']}}</div>
         </td>
      </tr>
