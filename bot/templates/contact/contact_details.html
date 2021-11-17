@@ -51,7 +51,13 @@
     <tr>
     <td class="left-column">Birthday</td>
     <td style="float:right; width: 60%">
-        <div class="right-column">&nbsp{{contact.birthday}}</div>
+        <div class="right-column">
+            {% if contact.birthday %}
+                &nbsp;{{contact.birthday}}
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </div>
     </td></tr>
     <tr>
     <td class="left-column">Email</td>
