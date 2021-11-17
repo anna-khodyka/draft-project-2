@@ -200,7 +200,6 @@ class ContactbookPSQL(Contactbook):
                 )
                 .all()
             )
-            print([res.name for res in result])
             for res in result:
                 res_list.append(res)
             res_list = sorted(res_list, key=self.distance)
