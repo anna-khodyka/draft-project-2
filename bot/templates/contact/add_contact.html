@@ -45,12 +45,13 @@
         </td>
      </tr>
      <tr>
-        <td align="left"> 
+        <td align="left" style="vertical-align:top;">
             <div>Phone list </div>
         </td> 
         <td align="left">
             <div style="color:none; border:0px white;" id="phone_div">
             {% if form_dict['Phone']['value'] %}
+                <div id="phone0"></div>
                 {%  for phone in  form_dict['Phone']['value'].split(",") %}
                 <div>
                     <input type="text" name="Phone"  value = "{{phone}}"
