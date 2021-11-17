@@ -38,9 +38,10 @@ def validate_contact_data(request, form_dict):
     :param form_dict: dictionary with validation params
     :return: dictionary with validated data
     """
+    request_dict = request.form.to_dict(flat=False)
     for key in form_dict.keys():
-        if re.search(r"^Hint", request.form.get(key)):
-            form_dict[key]["value"] = ""
+        if key == "Phone":
+            form_dict[key]["value"] = request_dict[key]
         else:
             form_dict[key]["value"] = request.form.get(key)
         res_tuple = form_dict[key]["checker"](form_dict[key]["value"])
@@ -103,16 +104,19 @@ def phone_checker(phones):
     """
     error_message = ""
     valid = True
+    valid_phones=[]
     if phones:
-        phones = clean_phone_str(phones)
-        for phone in phones.split(","):
-            if re.search(r"\+{0,1}\d{9,13}", phone.strip()) is None:
-                error_message = (
-                    """Phones format: '[+] XXXXXXXXXXXX'"""
-                    + """'(9-12 dig.), separated by ','"""
-                )
-                valid = False
-    return valid, error_message, phones
+        for phone in phones:
+            if phone:
+                valid_phones.append(phone)
+                if re.search(r"\+{0,1}\d{9,13}", phone.strip()) is None:
+                    error_message = (
+                        """Phones format: '[+] XXXXXXXXXXXX'"""
+                        + """'(9-12 dig.), separated by ','"""
+                    )
+
+                    valid = False
+    return valid, error_message, ", ".join(valid_phones)
 
 
 def zip_checker(zip_code):

@@ -65,7 +65,6 @@ def before_request():
         "login.register",
     ] and request.endpoint != 'static':
         return redirect(url_for("login.login"))
-    print("Static url:")
     return None
 
 
